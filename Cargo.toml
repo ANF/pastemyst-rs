@@ -3,6 +3,7 @@ name = "pastemyst-rs"
 version = "0.1.0"
 authors = ["ANF-Studios <anforg@outlook.com>"]
 edition = "2018"
+license = "MIT"
 
 exclude = [
     "examples/*",
