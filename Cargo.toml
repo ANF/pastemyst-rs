@@ -5,6 +5,7 @@ authors = ["ANF-Studios <anforg@outlook.com>"]
 edition = "2018"
 license = "MIT"
 repository = "https://github.com/ANF/pastemyst-rs"
+readme = "README.MD"
 
 exclude = [
     "examples/*",
