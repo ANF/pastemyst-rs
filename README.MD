@@ -11,7 +11,7 @@ use pastemyst_rs::paste;
 use pastemyst_rs::paste::PasteObject;
 
 #[allow(unused_must_use)]
-fn main() -> Result<(), Box<dyn std::error::Error>> { // What I personally like to do is create a type: type = 
+fn main() -> Result<(), Box<dyn std::error::Error>> {
     let paste: PasteObject = paste::get_paste("hipfqanx")?;
     println!("{}", paste.pasties[1].language);
     Ok(())
