@@ -1,4 +1,8 @@
-<h1 align="center" style="position: relative;">PasteMyst.RS</h1>
+<h1 align="center" style="position: relative;">
+    <img width="200" style="border-radius: 50%;"
+    src="https://raw.githubusercontent.com/ANF/pastemyst-rs/main/images/RustMyst.png" /><br>
+    PasteMyst.RS
+</h1>
 <h3 align="center">pastemyst-rs is an api wrapper for <a href="https://paste.myst.rs">pastemyst</a> written in Rust.</h3>
 <h2 align="center">⚠ This package is under development ⚠</h2>
 
