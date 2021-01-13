@@ -1,5 +1,4 @@
-#[allow(dead_code)]
-#[allow(unused_variables)]
+#[allow(dead_code, unused_variables)]
 pub mod paste {
     use serde::Deserialize;
 
@@ -11,13 +10,13 @@ pub mod paste {
     const GET_ENDPOINT: &str = "https://paste.myst.rs/api/v2/paste/";
 
     /// Gets a paste's data from [pastemyst](https://paste.myst.rs)
-    pub fn get_paste(id: &str) -> Result<PasteInfo, reqwest::Error> {
-        let info: PasteInfo = reqwest::blocking::get(&parse_url(id))?.json()?;
+    pub fn get_paste(id: &str) -> Result<PasteObject, reqwest::Error> {
+        let info: PasteObject = reqwest::blocking::get(&parse_url(id))?.json()?;
         Ok(info)
     }
 
-    pub fn get_private_paste(id: &str, auth_token: &str) -> Result<PasteInfo, reqwest::Error> {
-        let info: PasteInfo = reqwest::blocking::Client::builder()
+    pub async fn get_paste_async(id: &str) -> Result<PasteObject, reqwest::Error> {
+        let info: PasteObject = reqwest::get(&parse_url(id)).await?.json().await?;
             .build()?
             .get(&parse_url(id))
             .header("Authorization", auth_token)
