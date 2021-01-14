@@ -8,3 +8,4 @@
 * Ability to create pastes.
 * Ability to create pastes async.
 * Minor bug fixes and value changes.
+* Improvements and major additions to the documentation.
