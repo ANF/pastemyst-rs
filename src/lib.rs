@@ -2,12 +2,12 @@
 /// every method and struct to
 /// `GET` and `POST` (send) a paste
 /// to [pastemyst](https://paste.myst.rs).
-/// 
+///
 /// ### [API Docs](https://paste.myst.rs/api-docs/index)
 #[allow(dead_code, unused_variables)]
 pub mod paste {
-    use serde::Deserialize;
     use serde::Serialize;
+    use serde::Deserialize;
 
     /// The PasteResult type provided
     /// by this library for ease. It
@@ -41,14 +41,14 @@ pub mod paste {
     /// ```rust
     /// use pastemyst::paste::get_paste;
     /// use pastemyst::paste::PasteResult;
-    /// 
+    ///
     /// fn main() -> PasteResult<()> {
     ///     let foo = get_paste("hipfqanx");
     ///     println!("{:?}", foo.title);
     ///     Ok(())
     /// }
     /// ```
-    /// 
+    ///
     pub fn get_paste(id: &str) -> Result<PasteObject, reqwest::Error> {
         let info: PasteObject = reqwest::blocking::get(&parse_url(id))?.json()?;
         Ok(info)
@@ -58,13 +58,13 @@ pub mod paste {
     /// from [pastemyst](https://paste.myst.rs)
     /// asynchronously. It returns a `Result`
     /// with a `PasteObject` and error.
-    /// 
+    ///
     /// ## Examples
-    /// 
+    ///
     /// ```rust
     /// use pastemyst::paste::get_paste_async;
     /// use pastemyst::paste::PasteResult;
-    /// 
+    ///
     /// #[tokio::main]
     /// async fn main() -> PasteResult<()> {
     ///     let foo = get_paste_async("hipfqanx").await?;
@@ -81,13 +81,13 @@ pub mod paste {
     /// from [pastemyst](https://paste.myst.rs)
     /// synchronously. It returns a `Result`
     /// with a `PasteObject` and error.
-    /// 
+    ///
     /// ## Examples
-    /// 
+    ///
     /// ```rust
     /// use pastemyst::paste::get_private_paste;
     /// use pastemyst::paste::PasteResult;
-    /// 
+    ///
     /// fn main() -> PasteResult<()> {
     ///     let foo = get_private_paste("pasteID", "Your PasteMyst Token. Get it from: https://paste.myst.rs/user/settings");
     ///     println!("{:?}", foo._id);
@@ -108,13 +108,13 @@ pub mod paste {
     /// from [pastemyst](https://paste.myst.rs)
     /// asynchronously. It returns a `Result`
     /// with a `PasteObject` and error.
-    /// 
+    ///
     /// ## Examples
-    /// 
+    ///
     /// ```rust
     /// use pastemyst::paste::get_private_paste_async;
     /// use pastemyst::paste::PasteResult;
-    /// 
+    ///
     /// #[tokio::main]
     /// async fn main() -> Result<()> {
     ///     let foo = paste::get_private_paste_async("pasteID", "Your PasteMyst Token. Get it from: https://paste.myst.rs/user/settings").await?;
@@ -146,7 +146,7 @@ pub mod paste {
     /// ```rust
     /// use pastemyst::paste::PastyObject;
     /// use pastemyst::paste::*;
-    /// 
+    ///
     /// fn main() -> PasteResult<()> {
     ///     let pasties: Vec<PastyObject> = vec![
     ///             PastyObject {
@@ -177,13 +177,13 @@ pub mod paste {
     /// ```
     pub fn create_paste(contents: CreateObject) -> Result<PasteObject, reqwest::Error> {
         let content_type = reqwest::header::HeaderValue::from_static("application/json");
-        let result =
-            reqwest::blocking::Client::builder()
-                .build()?
-                .post(SEND_ENDPOINT)
-                .header(reqwest::header::CONTENT_TYPE, content_type)
-                .body(serde_json::to_string(&contents).unwrap())
-                .send().unwrap();
+        let result = reqwest::blocking::Client::builder()
+            .build()?
+            .post(SEND_ENDPOINT)
+            .header(reqwest::header::CONTENT_TYPE, content_type)
+            .body(serde_json::to_string(&contents).unwrap())
+            .send()
+            .unwrap();
         Ok(result.json()?)
     }
 
@@ -196,7 +196,7 @@ pub mod paste {
     /// ```rust
     /// use pastemyst::paste::PastyObject;
     /// use pastemyst::paste::*;
-    /// 
+    ///
     /// #[tokio::main]
     /// async fn main() -> PasteResult<()> {
     ///     let pasties: Vec<PastyObject> = vec![
@@ -228,13 +228,13 @@ pub mod paste {
     /// ```
     pub async fn create_paste_async(contents: CreateObject) -> Result<PasteObject, reqwest::Error> {
         let content_type = reqwest::header::HeaderValue::from_static("application/json");
-        let result =
-            reqwest::Client::builder()
-                .build()?
-                .post(SEND_ENDPOINT)
-                .header(reqwest::header::CONTENT_TYPE, content_type)
-                .body(serde_json::to_string(&contents).unwrap())
-                .send().await?;
+        let result = reqwest::Client::builder()
+            .build()?
+            .post(SEND_ENDPOINT)
+            .header(reqwest::header::CONTENT_TYPE, content_type)
+            .body(serde_json::to_string(&contents).unwrap())
+            .send()
+            .await?;
         Ok(result.json().await?)
     }
 
@@ -247,7 +247,7 @@ pub mod paste {
     /// getting a paste. It contains
     /// both the `PastyObject` and
     /// `EditObject` in an array.
-    /// 
+    ///
     /// ### API Docs
     /// The relevent link to the API documentation
     /// is: https://paste.myst.rs/api-docs/objects
@@ -296,7 +296,7 @@ pub mod paste {
     }
 
     /// Information about a specific pasty in a paste.
-    /// 
+    ///
     /// ### API Docs
     /// The relevent link to the API documentation
     /// is: https://paste.myst.rs/api-docs/objects
@@ -325,7 +325,7 @@ pub mod paste {
     }
 
     /// Infomation about edits in a pasty in a paste.
-    /// 
+    ///
     /// ### API Docs
     /// The relevent link to the API documentation
     /// is: https://paste.myst.rs/api-docs/objects
@@ -366,13 +366,13 @@ pub mod paste {
     /// is then sent to pastemyst. All
     /// fields are optional *except* the
     /// `pasties` array which uses `PastyObject`.
-    /// 
+    ///
     /// ### API Docs
     /// The relevent link to the API documentation
     /// is: https://paste.myst.rs/api-docs/objects
-    /// 
+    ///
     /// ## Examples
-    /// 
+    ///
     /// ```rust
     /// let _data: CreateObject = CreateObject {
     ///     title: String::from("[crates.io/crates/pastemyst] This is a title"),
