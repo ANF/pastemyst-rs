@@ -187,6 +187,18 @@ pub mod paste {
         Ok(result)
     }
 
+    pub async fn create_paste_async(contents: CreateObject) -> Result<reqwest::Response, reqwest::Error> {
+        let content_type = reqwest::header::HeaderValue::from_static("application/json");
+        let result =
+            reqwest::Client::builder()
+                .build()?
+                .post(SEND_ENDPOINT)
+                .header(reqwest::header::CONTENT_TYPE, content_type)
+                .body(serde_json::to_string(&contents).unwrap())
+                .send().await?;
+        Ok(result)
+    }
+
     /// Parses the url by combining
     /// the `PASTE_ENDPOINT` with a
     /// provided id.
