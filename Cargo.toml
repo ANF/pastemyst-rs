@@ -1,5 +1,5 @@
 [package]
-name = "pastemyst-rs"
+name = "pastemyst"
 version = "0.2.25"
 authors = ["ANF-Studios <anforg@outlook.com>"]
 edition = "2018"
