@@ -137,8 +137,9 @@ pub mod paste {
         Ok(info)
     }
 
-    /// Uses the `CreateObject` struct as a parameter for paste
-    /// data to be contructed and sent to [pastemyst](https://paste.myst.rs).
+    /// Uses the `CreateObject` struct as a parameter for paste data
+    /// to be contructed and sent to [pastemyst](https://paste.myst.rs).
+    /// in a synchronous manner.
     ///
     /// ## Examples
     ///
