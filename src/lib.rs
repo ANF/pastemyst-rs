@@ -157,6 +157,12 @@ pub mod paste {
         /// Unix time of when the edit was made
         pub editedAt: i32,
     }
+
+    /// The structure object that holds
+    /// the base to create a paste. This
+    /// is then sent to pastemyst. All
+    /// fields are optional *except* the
+    /// `pasties` array which uses `PastyObject`.
     #[derive(Serialize)]
     #[allow(non_snake_case, dead_code)]
     pub struct CreateObject {
