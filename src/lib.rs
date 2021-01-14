@@ -14,6 +14,11 @@ pub mod paste {
     const ENDPOINT: &str = "https://paste.myst.rs/";
     const BASE_ENDPOINT: &str = "https://paste.myst.rs/api/v2/";
     const GET_ENDPOINT: &str = "https://paste.myst.rs/api/v2/paste/";
+    /// This endpoint is temporarily here due to a bug in pastemyst
+    /// which does not allow the paste to be end when the last
+    /// slash is present.
+    const SEND_ENDPOINT: &str = "https://paste.myst.rs/api/v2/paste";
+    const PASTE_ENDPOINT: &str = "https://paste.myst.rs/api/v2/paste/";
 
     /// Gets a paste's data in json format
     /// from [pastemyst](https://paste.myst.rs)
