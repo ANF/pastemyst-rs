@@ -30,15 +30,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let pasties: Vec<PastyObject> = vec![
         PastyObject {
             _id: None,
-            language: Some(String::from("autodetect")),
             title: Some(String::from("A pasty title")),
-            code: Some(String::from("fn main() { println!("Hello World!"); }")),
+            language: Some(String::from("autodetect")),
+            code: Some(String::from("fn main() { println!(\"Hello World!\"); }")),
         },
         PastyObject {
             _id: None,
-            language: Some(String::from("autodetect")),
             title: Some(String::from("Another pasty title")),
-            code: Some(String::from("#include "stdio.h"\n\nint main() {\n\tprintf("Hello World!");\n}"),
+            language: Some(String::from("autodetect")),
+            code: Some(String::from("#include \"stdio.h\"\n\nint main() {\n\tprintf(\"Hello World!\");\n}")),
         },
     ];
     let data: CreateObject = CreateObject {
@@ -47,9 +47,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         isPrivate: false,
         isPublic: false,
         tags: String::from(""),
-        pasties: pasties,
+        pasties,
     };
-    let paste: /*reqwest::Response*/ = paste::create_paste(data).unwrap();
+    let paste: /*reqwest::Response*/ = paste::create_paste(data).unwrap(); // You don't need to add the commented part, that's jut for your information.
     println!("{}", paste._id);
     Ok(())
 }
