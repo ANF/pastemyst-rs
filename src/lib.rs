@@ -152,14 +152,14 @@ pub mod paste {
     ///             PastyObject {
     ///             _id: None,
     ///             language: Some(String::from("autodetect")),
-    ///             title: Some(String::from("eee")),
-    ///             code: Some(String::from("s")),
+    ///             title: Some(String::from("Pasty1")),
+    ///             code: Some(String::from("Code")),
     ///         },
     ///         PastyObject {
     ///             _id: None,
     ///             language: Some(String::from("autodetect")),
-    ///             title: Some(String::from("_eee")),
-    ///             code: Some(String::from("_s")),
+    ///             title: Some(String::from("Pasty2")),
+    ///             code: Some(String::from("Code")),
     ///         },
     ///     ];
     ///     let data: CreateObject = CreateObject {
