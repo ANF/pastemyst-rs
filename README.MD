@@ -44,7 +44,7 @@ More from the [examples](./examples/) and [wiki](https://github.com/ANF/pastemys
 | API v2 | Yes | N/A |
 | Get pastes | Yes | Yes |
 | Get private pastes | Yes | Yes |
-| Create pastes | Yes | No |
+| Create pastes | Yes | Yes |
 | Create Private pastes* | No | No |
 | Edit pastes | No | No |
 | Delete pastes | No | No |
