@@ -253,7 +253,7 @@ pub mod paste {
     /// ## Examples
     ///
     /// ```rust
-    /// 
+    /// let _foo: PasteObject = get_paste("hipfqanx");
     /// ```
     #[derive(Deserialize)]
     #[allow(non_snake_case, dead_code)]
