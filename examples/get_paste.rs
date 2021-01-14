@@ -9,6 +9,6 @@ use pastemyst_rs::paste::PasteObject;
 #[allow(unused_must_use)]
 fn main() -> Result<(), reqwest::Error> /*PasteResult<()>*/ {
     let paste: PasteObject = paste::get_paste("hipfqanx")?;
-    println!("{}", paste.pasties[1].language);
+    println!("{:#?}", paste.pasties[1].language);
     Ok(())
 }
