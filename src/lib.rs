@@ -170,7 +170,7 @@ pub mod paste {
     ///         tags: String::from(""),
     ///         pasties: pasties,
     ///     };
-    ///     let foo = create_paste("pasteID", "Your PasteMyst Token. Get it from: https://paste.myst.rs/user/settings");
+    ///     let foo = create_paste(data);
     ///     println!("{:?}", foo._id);
     ///     Ok(())
     /// }
@@ -189,7 +189,7 @@ pub mod paste {
 
     /// Parses the url by combining
     /// the `PASTE_ENDPOINT` with a
-    // provided id.
+    /// provided id.
     fn parse_url(id: &str) -> String { return PASTE_ENDPOINT.to_owned() + &id }
 
     /// The paste object recieved when
