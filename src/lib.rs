@@ -119,7 +119,7 @@ pub mod paste {
     }
 
     /// Information about a specific pasty in a paste.
-    #[derive(Deserialize)]
+    #[derive(Serialize, Deserialize)]
     #[allow(non_snake_case, dead_code)]
     pub struct PastyObject {
         /// Id of the pasty.
