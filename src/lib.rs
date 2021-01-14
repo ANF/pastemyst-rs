@@ -187,6 +187,45 @@ pub mod paste {
         Ok(result)
     }
 
+    /// Uses the `CreateObject` struct as a parameter for paste
+    /// data to be contructed and sent to [pastemyst](https://paste.myst.rs)
+    /// in an asynchronous manner.
+    ///
+    /// ## Examples
+    ///
+    /// ```rust
+    /// use pastemyst_rs::paste::PastyObject;
+    /// use pastemyst_rs::paste::*;
+    /// 
+    /// #[tokio::main]
+    /// async fn main() -> PasteResult<()> {
+    ///     let pasties: Vec<PastyObject> = vec![
+    ///             PastyObject {
+    ///             _id: None,
+    ///             language: Some(String::from("autodetect")),
+    ///             title: Some(String::from("Pasty1")),
+    ///             code: Some(String::from("Code")),
+    ///         },
+    ///         PastyObject {
+    ///             _id: None,
+    ///             language: Some(String::from("autodetect")),
+    ///             title: Some(String::from("Pasty2")),
+    ///             code: Some(String::from("Code")),
+    ///         },
+    ///     ];
+    ///     let data: CreateObject = CreateObject {
+    ///         title: String::from("This is a title"),
+    ///         expiresIn: String::from("1d"),
+    ///         isPrivate: false,
+    ///         isPublic: false,
+    ///         tags: String::from(""),
+    ///         pasties: pasties,
+    ///     };
+    ///     let foo = create_paste(data);
+    ///     println!("{:?}", foo.tags);
+    ///     Ok(())
+    /// }
+    /// ```
     pub async fn create_paste_async(contents: CreateObject) -> Result<reqwest::Response, reqwest::Error> {
         let content_type = reqwest::header::HeaderValue::from_static("application/json");
         let result =
