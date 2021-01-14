@@ -25,6 +25,6 @@ fn main() -> Result<(), reqwest::Error> /*PasteResult<()>*/ {
         pasties: pasties,
     };
     let paste = create_paste(data)?;
-    println!("{:#?}", paste.text()?);
+    println!("{:#?}", paste._id);
     Ok(())
 }

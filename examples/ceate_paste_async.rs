@@ -30,6 +30,6 @@ async fn main() -> Result<()> {
         pasties,
     };
     let paste = paste::create_paste_async(data).await?;
-    println!("{:?}", paste.text().await?);
+    println!("{:?}", paste._id);
     Ok(())
 }
