@@ -71,6 +71,20 @@ pub mod paste {
         Ok(info)
     }
 
+    /// Uses the `CreateObject` struct as a parameter for paste
+    /// data to be contructed and sent to [pastemyst](https://paste.myst.rs).
+    pub fn create_paste(contents: CreateObject) -> Result<reqwest::blocking::Response, reqwest::Error> {
+        let content_type = reqwest::header::HeaderValue::from_static("application/json");
+        let result =
+            reqwest::blocking::Client::builder()
+                .build()?
+                .post(SEND_ENDPOINT)
+                .header(reqwest::header::CONTENT_TYPE, content_type)
+                .body(serde_json::to_string(&contents).unwrap())
+                .send().unwrap();
+        Ok(result)
+    }
+
     /// Parses the url by combining
     /// the `PASTE_ENDPOINT` with a
     // provided id.
