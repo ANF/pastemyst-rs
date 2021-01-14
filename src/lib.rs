@@ -170,8 +170,8 @@ pub mod paste {
     ///         tags: String::from(""),
     ///         pasties: pasties,
     ///     };
-    ///     let foo = create_paste(data);
-    ///     println!("{:?}", foo._id);
+    ///     let paste = create_paste(data)?;
+    ///     println!("{:#?}", paste._id);
     ///     Ok(())
     /// }
     /// ```
@@ -221,8 +221,8 @@ pub mod paste {
     ///         tags: String::from(""),
     ///         pasties: pasties,
     ///     };
-    ///     let foo = create_paste(data);
-    ///     println!("{:?}", foo.tags);
+    ///     let paste = paste::create_paste_async(data).await?;
+    ///     println!("{:?}", paste._id);
     ///     Ok(())
     /// }
     /// ```
