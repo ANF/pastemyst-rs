@@ -248,7 +248,9 @@ pub mod paste {
     /// both the `PastyObject` and
     /// `EditObject` in an array.
     /// 
-    /// ### [API Docs](https://paste.myst.rs/api-docs/objects)
+    /// ### API Docs
+    /// The relevent link to the API documentation
+    /// is: https://paste.myst.rs/api-docs/objects
     ///
     /// ## Examples
     ///
@@ -295,7 +297,9 @@ pub mod paste {
 
     /// Information about a specific pasty in a paste.
     /// 
-    /// ### [API Docs](https://paste.myst.rs/api-docs/objects)
+    /// ### API Docs
+    /// The relevent link to the API documentation
+    /// is: https://paste.myst.rs/api-docs/objects
     ///
     /// ## Examples
     ///
@@ -322,7 +326,9 @@ pub mod paste {
 
     /// Infomation about edits in a pasty in a paste.
     /// 
-    /// ### [API Docs](https://paste.myst.rs/api-docs/objects)
+    /// ### API Docs
+    /// The relevent link to the API documentation
+    /// is: https://paste.myst.rs/api-docs/objects
     ///
     /// ## Examples
     ///
@@ -361,8 +367,10 @@ pub mod paste {
     /// fields are optional *except* the
     /// `pasties` array which uses `PastyObject`.
     /// 
-    /// ### [API Docs](https://paste.myst.rs/api-docs/paste)
-    ///
+    /// ### API Docs
+    /// The relevent link to the API documentation
+    /// is: https://paste.myst.rs/api-docs/objects
+    /// 
     /// ## Examples
     /// 
     /// ```rust
