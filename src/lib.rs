@@ -157,4 +157,24 @@ pub mod paste {
         /// Unix time of when the edit was made
         pub editedAt: i32,
     }
+    #[derive(Serialize)]
+    #[allow(non_snake_case, dead_code)]
+    pub struct CreateObject {
+        /// Title of the paste.
+        pub title: String,
+        /// When the paste will expire,
+        /// possible values are never, 1h,
+        /// 2h, 10h, 1d, 2d, 1w, 1m, 1y.
+        pub expiresIn: String,
+        /// If it's private it's only
+        /// accessible by the owner.
+        pub isPrivate: bool,
+        /// Is it displayed on the
+        /// owner's public profile.
+        pub isPublic: bool,
+        /// List of tags, comma separated.
+        pub tags: String,
+        /// List of pasties.
+        pub pasties: Vec<PastyObject>,
+    }
 }
