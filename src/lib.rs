@@ -123,13 +123,13 @@ pub mod paste {
     #[allow(non_snake_case, dead_code)]
     pub struct PastyObject {
         /// Id of the pasty.
-        pub _id: String,
+        pub _id: Option<String>,
         /// Language of the pasty.
-        pub language: String,
+        pub language: Option<String>,
         /// title of the pasty.
-        pub Title: String,
+        pub title: Option<String>,
         /// contents of the pasty.
-        pub Code: String,
+        pub code: Option<String>,
     }
 
     /// Infomation about edits in a pasty in a paste.
