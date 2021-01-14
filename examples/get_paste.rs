@@ -1,6 +1,6 @@
 // get_paste
-use pastemyst_rs::paste;
-use pastemyst_rs::paste::PasteObject;
+use pastemyst::paste;
+use pastemyst::paste::PasteObject;
 
 // You can use either the library's provided type or reqwest's
 // error and result (which requires it to be installed),

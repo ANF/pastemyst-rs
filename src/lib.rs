@@ -15,7 +15,7 @@ pub mod paste {
     ///
     /// ## Examples
     /// ```rust
-    /// use pastemyst_rs::paste::PasteResult;
+    /// use pastemyst::paste::PasteResult;
     ///
     /// fn main() -> PasteResult<()> {
     ///     Ok(())
@@ -39,8 +39,8 @@ pub mod paste {
     /// ## Examples
     ///
     /// ```rust
-    /// use pastemyst_rs::paste::get_paste;
-    /// use pastemyst_rs::paste::PasteResult;
+    /// use pastemyst::paste::get_paste;
+    /// use pastemyst::paste::PasteResult;
     /// 
     /// fn main() -> PasteResult<()> {
     ///     let foo = get_paste("hipfqanx");
@@ -62,8 +62,8 @@ pub mod paste {
     /// ## Examples
     /// 
     /// ```rust
-    /// use pastemyst_rs::paste::get_paste_async;
-    /// use pastemyst_rs::paste::PasteResult;
+    /// use pastemyst::paste::get_paste_async;
+    /// use pastemyst::paste::PasteResult;
     /// 
     /// #[tokio::main]
     /// async fn main() -> PasteResult<()> {
@@ -85,8 +85,8 @@ pub mod paste {
     /// ## Examples
     /// 
     /// ```rust
-    /// use pastemyst_rs::paste::get_private_paste;
-    /// use pastemyst_rs::paste::PasteResult;
+    /// use pastemyst::paste::get_private_paste;
+    /// use pastemyst::paste::PasteResult;
     /// 
     /// fn main() -> PasteResult<()> {
     ///     let foo = get_private_paste("pasteID", "Your PasteMyst Token. Get it from: https://paste.myst.rs/user/settings");
@@ -112,8 +112,8 @@ pub mod paste {
     /// ## Examples
     /// 
     /// ```rust
-    /// use pastemyst_rs::paste::get_private_paste_async;
-    /// use pastemyst_rs::paste::PasteResult;
+    /// use pastemyst::paste::get_private_paste_async;
+    /// use pastemyst::paste::PasteResult;
     /// 
     /// #[tokio::main]
     /// async fn main() -> Result<()> {
@@ -144,8 +144,8 @@ pub mod paste {
     /// ## Examples
     ///
     /// ```rust
-    /// use pastemyst_rs::paste::PastyObject;
-    /// use pastemyst_rs::paste::*;
+    /// use pastemyst::paste::PastyObject;
+    /// use pastemyst::paste::*;
     /// 
     /// fn main() -> PasteResult<()> {
     ///     let pasties: Vec<PastyObject> = vec![
@@ -194,8 +194,8 @@ pub mod paste {
     /// ## Examples
     ///
     /// ```rust
-    /// use pastemyst_rs::paste::PastyObject;
-    /// use pastemyst_rs::paste::*;
+    /// use pastemyst::paste::PastyObject;
+    /// use pastemyst::paste::*;
     /// 
     /// #[tokio::main]
     /// async fn main() -> PasteResult<()> {

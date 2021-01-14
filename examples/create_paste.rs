@@ -1,5 +1,5 @@
 // create_paste
-use pastemyst_rs::paste::*;
+use pastemyst::paste::*;
 
 fn main() -> Result<(), reqwest::Error> /*PasteResult<()>*/ {
     let pasties: Vec<PastyObject> = vec![

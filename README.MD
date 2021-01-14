@@ -11,8 +11,8 @@
 
 To get a paste from pastemyst synchronously:
 ```rust
-use pastemyst_rs::paste;
-use pastemyst_rs::paste::PasteObject;
+use pastemyst::paste;
+use pastemyst::paste::PasteObject;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let paste: PasteObject = paste::get_paste("hipfqanx")?;
@@ -23,8 +23,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 To create paste synchronously:
 ```rust
-use pastemyst_rs::paste;
-use pastemyst_rs::paste::PasteObject;
+use pastemyst::paste;
+use pastemyst::paste::PasteObject;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let pasties: Vec<PastyObject> = vec![

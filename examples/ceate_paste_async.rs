@@ -1,6 +1,6 @@
 // create_paste_async
-use pastemyst_rs::paste;
-use pastemyst_rs::paste::*;
+use pastemyst::paste;
+use pastemyst::paste::*;
 
 type Error = Box<dyn std::error::Error>;
 type Result<T, E = Error> = std::result::Result<T, E>;
