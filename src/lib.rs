@@ -1,7 +1,9 @@
 /// The paste namespace which contains
 /// every method and struct to
 /// `GET` and `POST` (send) a paste
-// to [pastemyst](https://paste.myst.rs).
+/// to [pastemyst](https://paste.myst.rs).
+/// 
+/// ### [API Docs](https://paste.myst.rs/api-docs/index)
 #[allow(dead_code, unused_variables)]
 pub mod paste {
     use serde::Deserialize;
@@ -193,6 +195,8 @@ pub mod paste {
     /// getting a paste. It contains
     /// both the `PastyObject` and
     /// `EditObject` in an array.
+    /// 
+    /// ### [API Docs](https://paste.myst.rs/api-docs/objects)
     ///
     /// ## Examples
     ///
@@ -238,6 +242,8 @@ pub mod paste {
     }
 
     /// Information about a specific pasty in a paste.
+    /// 
+    /// ### [API Docs](https://paste.myst.rs/api-docs/objects)
     ///
     /// ## Examples
     ///
@@ -263,6 +269,8 @@ pub mod paste {
     }
 
     /// Infomation about edits in a pasty in a paste.
+    /// 
+    /// ### [API Docs](https://paste.myst.rs/api-docs/objects)
     ///
     /// ## Examples
     ///
@@ -300,6 +308,8 @@ pub mod paste {
     /// is then sent to pastemyst. All
     /// fields are optional *except* the
     /// `pasties` array which uses `PastyObject`.
+    /// 
+    /// ### [API Docs](https://paste.myst.rs/api-docs/paste)
     ///
     /// ## Examples
     /// 
