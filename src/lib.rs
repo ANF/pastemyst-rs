@@ -72,11 +72,9 @@ pub mod paste {
     }
 
     /// Parses the url by combining
-    /// the `GET_ENDPOINT` with a
+    /// the `PASTE_ENDPOINT` with a
     // provided id.
-    fn parse_url(id: &str) -> String {
-        return GET_ENDPOINT.to_owned() + &id;
-    }
+    fn parse_url(id: &str) -> String { return PASTE_ENDPOINT.to_owned() + &id }
 
     /// The paste object recieved when
     /// getting a paste. It contains
