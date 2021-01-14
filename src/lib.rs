@@ -238,6 +238,18 @@ pub mod paste {
         Ok(result.json().await?)
     }
 
+    pub fn create_private_paste(contents: CreateObject, auth_token: &str) -> Result<PasteObject, reqwest::Error> {
+        let content_type = reqwest::header::HeaderValue::from_static("application/json");
+        let result = reqwest::blocking::Client::builder()
+            .build()?
+            .post(SEND_ENDPOINT)
+            .header("Authorization", auth_token)
+            .header(reqwest::header::CONTENT_TYPE, content_type)
+            .body(serde_json::to_string(&contents).unwrap())
+            .send()?;
+        Ok(result.json()?)
+    }
+
     /// Parses the url by combining
     /// the `PASTE_ENDPOINT` with a
     /// provided id.
