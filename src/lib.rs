@@ -10,6 +10,15 @@ pub mod paste {
     /// The PasteResult type provided
     /// by this library for ease. It
     /// has a return value and error.
+    ///
+    /// ## Examples
+    /// ```rust
+    /// use pastemyst_rs::paste::PasteResult;
+    ///
+    /// fn main() -> PasteResult<()> {
+    ///     Ok(())
+    /// }
+    /// ```
     pub type PasteResult<T, E = Box<dyn std::error::Error>> = std::result::Result<T, E>;
 
     const ENDPOINT: &str = "https://paste.myst.rs/";
@@ -24,6 +33,20 @@ pub mod paste {
     /// from [pastemyst](https://paste.myst.rs)
     /// synchronously. It returns a `Result`
     /// with a `PasteObject` and error.
+    ///
+    /// ## Examples
+    ///
+    /// ```rust
+    /// use pastemyst_rs::paste::get_paste;
+    /// use pastemyst_rs::paste::PasteResult;
+    /// 
+    /// fn main() -> PasteResult<()> {
+    ///     let foo = get_paste("hipfqanx");
+    ///     println!("{:?}", foo.title);
+    ///     Ok(())
+    /// }
+    /// ```
+    /// 
     pub fn get_paste(id: &str) -> Result<PasteObject, reqwest::Error> {
         let info: PasteObject = reqwest::blocking::get(&parse_url(id))?.json()?;
         Ok(info)
@@ -33,6 +56,20 @@ pub mod paste {
     /// from [pastemyst](https://paste.myst.rs)
     /// asynchronously. It returns a `Result`
     /// with a `PasteObject` and error.
+    /// 
+    /// ## Examples
+    /// 
+    /// ```rust
+    /// use pastemyst_rs::paste::get_paste_async;
+    /// use pastemyst_rs::paste::PasteResult;
+    /// 
+    /// #[tokio::main]
+    /// async fn main() -> PasteResult<()> {
+    ///     let foo = get_paste_async("hipfqanx").await?;
+    ///     println!("{:?}", foo._id);
+    ///     Ok(())
+    /// }
+    /// ```
     pub async fn get_paste_async(id: &str) -> Result<PasteObject, reqwest::Error> {
         let info: PasteObject = reqwest::get(&parse_url(id)).await?.json().await?;
         Ok(info)
@@ -42,6 +79,19 @@ pub mod paste {
     /// from [pastemyst](https://paste.myst.rs)
     /// synchronously. It returns a `Result`
     /// with a `PasteObject` and error.
+    /// 
+    /// ## Examples
+    /// 
+    /// ```rust
+    /// use pastemyst_rs::paste::get_private_paste;
+    /// use pastemyst_rs::paste::PasteResult;
+    /// 
+    /// fn main() -> PasteResult<()> {
+    ///     let foo = get_private_paste("pasteID", "Your PasteMyst Token. Get it from: https://paste.myst.rs/user/settings");
+    ///     println!("{:?}", foo._id);
+    ///     Ok(())
+    /// }
+    /// ```
     pub fn get_private_paste(id: &str, auth_token: &str) -> Result<PasteObject, reqwest::Error> {
         let info: PasteObject = reqwest::blocking::Client::builder()
             .build()?
@@ -56,6 +106,20 @@ pub mod paste {
     /// from [pastemyst](https://paste.myst.rs)
     /// asynchronously. It returns a `Result`
     /// with a `PasteObject` and error.
+    /// 
+    /// ## Examples
+    /// 
+    /// ```rust
+    /// use pastemyst_rs::paste::get_private_paste_async;
+    /// use pastemyst_rs::paste::PasteResult;
+    /// 
+    /// #[tokio::main]
+    /// async fn main() -> Result<()> {
+    ///     let foo = paste::get_private_paste_async("pasteID", "Your PasteMyst Token. Get it from: https://paste.myst.rs/user/settings").await?;
+    ///     println!("{}", paste.isPrivate);
+    ///     Ok(())
+    /// }
+    /// ```
     pub async fn get_private_paste_async(
         id: &str,
         auth_token: &str,
@@ -73,6 +137,41 @@ pub mod paste {
 
     /// Uses the `CreateObject` struct as a parameter for paste
     /// data to be contructed and sent to [pastemyst](https://paste.myst.rs).
+    ///
+    /// ## Examples
+    ///
+    /// ```rust
+    /// use pastemyst_rs::paste::PastyObject;
+    /// use pastemyst_rs::paste::*;
+    /// 
+    /// fn main() -> PasteResult<()> {
+    ///     let pasties: Vec<PastyObject> = vec![
+    ///             PastyObject {
+    ///             _id: None,
+    ///             language: Some(String::from("autodetect")),
+    ///             title: Some(String::from("eee")),
+    ///             code: Some(String::from("s")),
+    ///         },
+    ///         PastyObject {
+    ///             _id: None,
+    ///             language: Some(String::from("autodetect")),
+    ///             title: Some(String::from("_eee")),
+    ///             code: Some(String::from("_s")),
+    ///         },
+    ///     ];
+    ///     let data: CreateObject = CreateObject {
+    ///         title: String::from("This is a title"),
+    ///         expiresIn: String::from("1d"),
+    ///         isPrivate: false,
+    ///         isPublic: false,
+    ///         tags: String::from(""),
+    ///         pasties: pasties,
+    ///     };
+    ///     let foo = create_paste("pasteID", "Your PasteMyst Token. Get it from: https://paste.myst.rs/user/settings");
+    ///     println!("{:?}", foo._id);
+    ///     Ok(())
+    /// }
+    /// ```
     pub fn create_paste(contents: CreateObject) -> Result<reqwest::blocking::Response, reqwest::Error> {
         let content_type = reqwest::header::HeaderValue::from_static("application/json");
         let result =
@@ -94,6 +193,12 @@ pub mod paste {
     /// getting a paste. It contains
     /// both the `PastyObject` and
     /// `EditObject` in an array.
+    ///
+    /// ## Examples
+    ///
+    /// ```rust
+    /// 
+    /// ```
     #[derive(Deserialize)]
     #[allow(non_snake_case, dead_code)]
     pub struct PasteObject {
@@ -133,6 +238,17 @@ pub mod paste {
     }
 
     /// Information about a specific pasty in a paste.
+    ///
+    /// ## Examples
+    ///
+    /// ```rust
+    /// let pasty: PastyObject = PastyObject {
+    ///     _id: None,
+    ///     language: Some(String::from("autodetect")),
+    ///     title: Some(String::from("This is a pasty title")),
+    ///     code: Some(String::from("{\"This_Is\": \"JSON_Code\"}")),
+    /// };
+    /// ```
     #[derive(Serialize, Deserialize)]
     #[allow(non_snake_case, dead_code)]
     pub struct PastyObject {
@@ -147,6 +263,13 @@ pub mod paste {
     }
 
     /// Infomation about edits in a pasty in a paste.
+    ///
+    /// ## Examples
+    ///
+    /// ```rust
+    /// // Get paste from pastemyst
+    /// let edits: EditObject = paste.edits;
+    /// ```
     #[derive(Deserialize)]
     #[allow(non_snake_case, dead_code)]
     pub struct EditObject {
@@ -177,6 +300,19 @@ pub mod paste {
     /// is then sent to pastemyst. All
     /// fields are optional *except* the
     /// `pasties` array which uses `PastyObject`.
+    ///
+    /// ## Examples
+    /// 
+    /// ```rust
+    /// let _data: CreateObject = CreateObject {
+    ///     title: String::from("This is a title"),
+    ///     expiresIn: String::from("1d"),
+    ///     isPrivate: false,
+    ///     isPublic: false,
+    ///     tags: String::from(""),
+    ///     pasties: var_pasties,
+    /// };
+    /// ```
     #[derive(Serialize)]
     #[allow(non_snake_case, dead_code)]
     pub struct CreateObject {
