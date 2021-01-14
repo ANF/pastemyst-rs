@@ -6,8 +6,8 @@
 /// ### [API Docs](https://paste.myst.rs/api-docs/index)
 #[allow(dead_code, unused_variables)]
 pub mod paste {
-    use serde::Serialize;
     use serde::Deserialize;
+    use serde::Serialize;
 
     /// The PasteResult type provided
     /// by this library for ease. It
