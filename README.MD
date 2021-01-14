@@ -65,7 +65,7 @@ More from the [examples](./examples/) and [documentation](https://docs.rs/pastem
 | Get pastes | Yes | Yes |
 | Get private pastes | Yes | Yes |
 | Create pastes | Yes | Yes |
-| Create Private pastes* | No | No |
+| Create Private pastes* | Yes | Yes |
 | Edit pastes | No | No |
 | Delete pastes | No | No |
 | Get Users | No | No |
