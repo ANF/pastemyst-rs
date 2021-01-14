@@ -175,7 +175,7 @@ pub mod paste {
     ///     Ok(())
     /// }
     /// ```
-    pub fn create_paste(contents: CreateObject) -> Result<reqwest::blocking::Response, reqwest::Error> {
+    pub fn create_paste(contents: CreateObject) -> Result<PasteObject, reqwest::Error> {
         let content_type = reqwest::header::HeaderValue::from_static("application/json");
         let result =
             reqwest::blocking::Client::builder()
@@ -184,7 +184,7 @@ pub mod paste {
                 .header(reqwest::header::CONTENT_TYPE, content_type)
                 .body(serde_json::to_string(&contents).unwrap())
                 .send().unwrap();
-        Ok(result)
+        Ok(result.json()?)
     }
 
     /// Uses the `CreateObject` struct as a parameter for paste
@@ -226,7 +226,7 @@ pub mod paste {
     ///     Ok(())
     /// }
     /// ```
-    pub async fn create_paste_async(contents: CreateObject) -> Result<reqwest::Response, reqwest::Error> {
+    pub async fn create_paste_async(contents: CreateObject) -> Result<PasteObject, reqwest::Error> {
         let content_type = reqwest::header::HeaderValue::from_static("application/json");
         let result =
             reqwest::Client::builder()
@@ -235,7 +235,7 @@ pub mod paste {
                 .header(reqwest::header::CONTENT_TYPE, content_type)
                 .body(serde_json::to_string(&contents).unwrap())
                 .send().await?;
-        Ok(result)
+        Ok(result.json().await?)
     }
 
     /// Parses the url by combining
