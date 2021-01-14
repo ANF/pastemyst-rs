@@ -17,7 +17,7 @@ fn main() -> Result<(), reqwest::Error> /*PasteResult<()>*/ {
         },
     ];
     let data: CreateObject = CreateObject {
-        title: String::from("This is a paste title"),
+        title: String::from("[crates.io/crates/pastemyst] This is a title"),
         expiresIn: String::from("1d"),
         isPrivate: false,
         isPublic: false,
