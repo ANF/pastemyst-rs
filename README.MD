@@ -14,7 +14,6 @@ To get a paste from pastemyst synchronously:
 use pastemyst_rs::paste;
 use pastemyst_rs::paste::PasteObject;
 
-#[allow(unused_must_use)]
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let paste: PasteObject = paste::get_paste("hipfqanx")?;
     println!("{}", paste.pasties[1].language);
@@ -22,15 +21,36 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-To get a private paste synchronously:
+To create paste synchronously:
 ```rust
 use pastemyst_rs::paste;
 use pastemyst_rs::paste::PasteObject;
 
-#[allow(unused_must_use)]
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let paste: PasteObject = paste::get_private_paste("pasteID", "Your PasteMyst Token. Get it from: https://paste.myst.rs/user/settings")?;
-    println!("{}", paste.ownerId);
+    let pasties: Vec<PastyObject> = vec![
+        PastyObject {
+            _id: None,
+            language: Some(String::from("autodetect")),
+            title: Some(String::from("A pasty title")),
+            code: Some(String::from("fn main() { println!("Hello World!"); }")),
+        },
+        PastyObject {
+            _id: None,
+            language: Some(String::from("autodetect")),
+            title: Some(String::from("Another pasty title")),
+            code: Some(String::from("#include "stdio.h"\n\nint main() {\n\tprintf("Hello World!");\n}"),
+        },
+    ];
+    let data: CreateObject = CreateObject {
+        title: String::from("This is a paste title"),
+        expiresIn: String::from("1d"),
+        isPrivate: false,
+        isPublic: false,
+        tags: String::from(""),
+        pasties: pasties,
+    };
+    let paste: /*reqwest::Response*/ = paste::create_paste(data).unwrap();
+    println!("{}", paste._id);
     Ok(())
 }
 ```
