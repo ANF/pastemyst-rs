@@ -9,3 +9,12 @@
 * Ability to create pastes async.
 * Minor bug fixes and value changes.
 * Improvements and major additions to the documentation.
+
+### What's coming up? (currently done)
+* Ability to create private pastes.
+* Ability to create private pastes async.
+* Fixed `create_paste` and `create_paste_async`'s return type.
+* Improved documentation.
+* Fixed some incorrect sentences and spellings in docs.
+* Added missing docs.
+* Fixed incorrect examples in docs.
