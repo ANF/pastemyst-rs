@@ -358,7 +358,7 @@ pub mod paste {
     ///
     /// ```rust
     /// // Get paste from pastemyst
-    /// let edits: EditObject = paste.edits;
+    /// let edits: EditObject = paste.edits[0];
     /// ```
     #[derive(Deserialize)]
     #[allow(non_snake_case, dead_code)]
