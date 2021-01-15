@@ -117,7 +117,7 @@ pub mod paste {
     ///
     /// #[tokio::main]
     /// async fn main() -> Result<()> {
-    ///     let foo = paste::get_private_paste_async("pasteID", "Your PasteMyst Token. Get it from: https://paste.myst.rs/user/settings").await?;
+    ///     let foo = get_private_paste_async("pasteID", "Your PasteMyst Token. Get it from: https://paste.myst.rs/user/settings").await?;
     ///     println!("{}", paste.isPrivate);
     ///     Ok(())
     /// }
