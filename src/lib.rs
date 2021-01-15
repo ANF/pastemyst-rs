@@ -238,6 +238,28 @@ pub mod paste {
         Ok(result.json().await?)
     }
 
+    /// Uses the `CreateObject` and `&str` (`auth_token`) to
+    /// send a paste to [pastemyst](https://paste.myst.rs)
+    /// held under your account which you can configure
+    /// to be private/public or not. You also get the
+    /// authority to delete that paste. This is a 
+    /// synchronous method.
+    ///
+    /// ## Examples
+    ///
+    /// ```rust
+    /// use pastemyst::paste::create_private_paste;
+    /// use pastemyst::paste::get_paste;
+    /// use pastemyst::paste::PasteResult;
+    ///
+    /// #[tokio::main]
+    /// async fn main() -> Result<()> {
+    ///     let contents = get_paste(hipfqanx);
+    ///     let paste = create_private_paste(contents, "Your PasteMyst Token. Get it from: https://paste.myst.rs/user/settings").await?;
+    ///     println!("{}", paste.isPrivate);
+    ///     Ok(())
+    /// }
+    /// ```
     pub fn create_private_paste(
         contents: CreateObject,
         auth_token: &str,
