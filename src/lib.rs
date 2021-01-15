@@ -137,9 +137,9 @@ pub mod paste {
         Ok(info)
     }
 
-    /// Uses the `CreateObject` struct as a parameter for paste data
-    /// to be contructed and sent to [pastemyst](https://paste.myst.rs).
-    /// in a synchronous manner.
+    /// Uses the `CreateObject` struct as a parameter for paste
+    /// data to be constructed into json format and sent to
+    /// [pastemyst](https://paste.myst.rs) in a synchronous manner.
     ///
     /// ## Examples
     ///
@@ -188,8 +188,8 @@ pub mod paste {
     }
 
     /// Uses the `CreateObject` struct as a parameter for paste
-    /// data to be contructed and sent to [pastemyst](https://paste.myst.rs)
-    /// in an asynchronous manner.
+    /// data to be constructed into json format and sent to
+    /// [pastemyst](https://paste.myst.rs) in an asynchronous manner.
     ///
     /// ## Examples
     ///
@@ -238,7 +238,10 @@ pub mod paste {
         Ok(result.json().await?)
     }
 
-    pub fn create_private_paste(contents: CreateObject, auth_token: &str) -> Result<PasteObject, reqwest::Error> {
+    pub fn create_private_paste(
+        contents: CreateObject,
+        auth_token: &str,
+    ) -> Result<PasteObject, reqwest::Error> {
         let content_type = reqwest::header::HeaderValue::from_static("application/json");
         let result = reqwest::blocking::Client::builder()
             .build()?
@@ -250,7 +253,10 @@ pub mod paste {
         Ok(result.json()?)
     }
 
-    pub async fn create_private_paste_async(contents: CreateObject, auth_token: &str) -> Result<PasteObject, reqwest::Error> {
+    pub async fn create_private_paste_async(
+        contents: CreateObject,
+        auth_token: &str,
+    ) -> Result<PasteObject, reqwest::Error> {
         let content_type = reqwest::header::HeaderValue::from_static("application/json");
         let result = reqwest::Client::builder()
             .build()?
@@ -258,7 +264,8 @@ pub mod paste {
             .header("Authorization", auth_token)
             .header(reqwest::header::CONTENT_TYPE, content_type)
             .body(serde_json::to_string(&contents).unwrap())
-            .send().await?;
+            .send()
+            .await?;
         Ok(result.json().await?)
     }
 
