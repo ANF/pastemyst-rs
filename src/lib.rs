@@ -710,7 +710,7 @@ pub mod paste {
         /// accessible by the owner.
         pub isPrivate: bool,
         /// Is it displayed on the
-        /// owner"s public profile.
+        /// owner's public profile.
         pub isPublic: bool,
         /// List of tags, comma separated.
         pub tags: String,
