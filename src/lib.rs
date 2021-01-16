@@ -3,7 +3,10 @@
 /// `GET` and `POST` (send) a paste
 /// to [pastemyst](https://paste.myst.rs).
 ///
-/// ### [API Docs](https://paste.myst.rs/api-docs/index)
+/// ### [API Docs]
+/// Here is the official PasteMyst API
+/// documentation:
+/// https://paste.myst.rs/api-docs/index
 #[allow(dead_code, unused_variables)]
 pub mod paste {
     use serde::Deserialize;
@@ -396,6 +399,18 @@ pub mod paste {
 
     /// Information about a specific pasty in a paste.
     ///
+    /// All fields except `language` are optional but due
+    /// to Rust's nature, so you must provide them. The
+    /// _id field should always be set to `None` though
+    /// if it's not, it is ignored by PasteMyst's API.
+    /// 
+    /// The design choice of the language field not being
+    /// optional was because auto detect isn't perfect
+    /// and you generally should not rely on it especially
+    /// with close bonded languages like C++ and C# which is
+    /// sometimes confused by the language detector. However,
+    /// you do not need to and can change set it to auto detect.
+    ///
     /// ### API Docs
     /// The relevent link to the API documentation
     /// is: https://paste.myst.rs/api-docs/objects
@@ -479,7 +494,7 @@ pub mod paste {
     ///     isPrivate: false,
     ///     isPublic: false,
     ///     tags: String::from(""),
-    ///     pasties: var_pasties,
+    ///     pasties: pasties,
     /// };
     /// ```
     #[derive(Serialize)]
@@ -491,7 +506,58 @@ pub mod paste {
         /// possible values are never, 1h,
         /// 2h, 10h, 1d, 2d, 1w, 1m, 1y.
         pub expiresIn: String,
-        /// If it's private it's only
+        /// If it"s private it"s only
+        /// accessible by the owner.
+        pub isPrivate: bool,
+        /// Is it displayed on the
+        /// owner"s public profile.
+        pub isPublic: bool,
+        /// List of tags, comma separated.
+        pub tags: String,
+        /// List of pasties.
+        pub pasties: Vec<PastyObject>,
+    }
+
+    /// The same as `CreateObject` except
+    /// that it does not have the `expiresIn`
+    /// field which has been removed for
+    /// convenience. This may change in
+    /// the future, but for the current
+    /// moment, this shall remain.
+    ///
+    /// You can only edit pastes on your account,
+    /// so you must provide the Authorization header.
+    /// it returns a full paste object. To edit a paste
+    /// you need to provide only the values you are
+    /// editing in the JSON body.
+    ///
+    /// To edit a single pasty you will need to provide
+    /// all of the original pasties changing the fields
+    //// you want. it"s not possible to update a single
+    /// pasty without providing all of the pasties.
+    ///
+    /// ### API Docs
+    /// The relevent link to the API documentation
+    /// is: https://paste.myst.rs/api-docs/paste#edit-a-paste
+    ///
+    /// ## Examples
+    ///
+    /// ```rust
+    /// let _data: CreateObject = CreateObject {
+    ///     title: String::from("[crates.io/crates/pastemyst] This is a title"),
+    ///     expiresIn: String::from("1d"),
+    ///     isPrivate: false,
+    ///     isPublic: false,
+    ///     tags: String::from(""),
+    ///     pasties: var_pasties,
+    /// };
+    /// ```
+    #[derive(Serialize)]
+    #[allow(non_snake_case, dead_code)]
+    pub(crate) struct EditObject {
+        /// Title of the paste.
+        pub title: String,
+        /// If it"s private it"s only
         /// accessible by the owner.
         pub isPrivate: bool,
         /// Is it displayed on the
