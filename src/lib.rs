@@ -51,7 +51,7 @@ pub mod paste {
         pub const CRYSTAL: &str = "Crystal";
         pub const CSS: &str = "CSS";
         pub const CQL: &str = "CQL";
-        pub const DLANG: &str = "D";
+        pub const DLANG: &'static str = "D";
         pub const D: &str = "D";
         pub const DART: &str = "Dart";
         pub const DIFF: &str = "diff";
@@ -391,7 +391,7 @@ pub mod paste {
     ///     Ok(())
     /// }
     /// ```
-    pub async fn create_paste_async(contents: CreateObject) -> Result<PasteObject, reqwest::Error> {
+    pub async fn create_paste_async(contents: CreateObject) -> Result<PasteObject<'static>, reqwest::Error> {
         let content_type = reqwest::header::HeaderValue::from_static("application/json");
         let result = reqwest::Client::builder()
             .build()?
@@ -502,6 +502,22 @@ pub mod paste {
         Ok(result.json().await?)
     }
 
+    // Under construction.
+    pub fn edit_paste(edit_info: &EditObject, id: &str, auth_token: &str) -> Result<(), reqwest::Error> {
+        println!("{}", &parse_url(&id));
+        let content_type = reqwest::header::HeaderValue::from_static("application/json");
+        let result = reqwest::blocking::Client::builder()
+            .build()?
+            .patch(&parse_url(&id))
+            .header("Authorization", auth_token)
+            .header(reqwest::header::CONTENT_TYPE, content_type)
+            .body(serde_json::to_string(&edit_info).unwrap())
+            .send()?;
+        print!("Result: ");
+        println!("{:?}", result.text()?);
+        Ok(())
+    }
+
     /// You can only delete pastes on your account, which
     /// means you must also provide the authorization key.
     /// This action is irreversible can the paste cannot
@@ -548,7 +564,7 @@ pub mod paste {
     /// The paste object recieved when
     /// getting a paste. It contains
     /// both the `PastyObject` and
-    /// `EditObject` in an array.
+    /// `EditHistory` in an array.
     ///
     /// ### API Docs
     /// The relevent link to the API documentation
@@ -561,7 +577,7 @@ pub mod paste {
     /// ```
     #[derive(Deserialize)]
     #[allow(non_snake_case, dead_code)]
-    pub struct PasteObject {
+    pub struct PasteObject<'a> {
         /// Id of the paste.
         pub _id: String,
         /// Id of the owner, if it doesn't
@@ -592,9 +608,10 @@ pub mod paste {
         pub tags: Vec<String>,
         /// List of pasties/files in
         /// the paste, can't be empty.
-        pub pasties: Vec<PastyObject>,
+        #[serde(borrow)]
+        pub pasties: Box<[PastyObject<'a>]>,
         /// List of edits.
-        pub edits: Vec<EditObject>,
+        pub edits: Vec<EditHistory>,
     }
 
     /// Information about a specific pasty in a paste.
@@ -620,22 +637,31 @@ pub mod paste {
     /// ```rust
     /// let pasty: PastyObject = PastyObject {
     ///     _id: None,
-    ///     language: Some(String::from("autodetect")),
+    ///     language: pastemyst::paste::language::JSON,
     ///     title: Some(String::from("This is a pasty title")),
     ///     code: Some(String::from("{\"This_Is\": \"JSON_Code\"}")),
     /// };
     /// ```
     #[derive(Serialize, Deserialize)]
     #[allow(non_snake_case, dead_code)]
-    pub struct PastyObject {
+    pub struct PastyObject<'a> {
         /// Id of the pasty.
         pub _id: Option<String>,
         /// Language of the pasty.
-        pub language: Option<String>,
+        #[serde(borrow)]
+        pub language: &'a str,
         /// title of the pasty.
         pub title: Option<String>,
         /// contents of the pasty.
         pub code: Option<String>,
+    }
+
+    //impl Deserialize<'static> for PastyObject {
+        
+    //}
+
+    trait __PastyObject {
+        fn test() -> String;
     }
 
     /// Infomation about edits in a pasty in a paste.
@@ -648,11 +674,11 @@ pub mod paste {
     ///
     /// ```rust
     /// // Get paste from pastemyst
-    /// let edits: EditObject = paste.edits[0];
+    /// let edits: EditHistory = paste.edits[0];
     /// ```
     #[derive(Deserialize)]
     #[allow(non_snake_case, dead_code)]
-    pub struct EditObject {
+    pub struct EditHistory {
         /// Unique id of the edit.
         pub _id: String,
         /// Id of the edit, multiple edits can
@@ -754,7 +780,7 @@ pub mod paste {
     /// ```
     #[derive(Serialize)]
     #[allow(non_snake_case, dead_code)]
-    pub(crate) struct EditObject {
+    pub struct EditObject {
         /// Title of the paste.
         pub title: String,
         /// If it"s private it"s only
