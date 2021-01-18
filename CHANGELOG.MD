@@ -18,3 +18,7 @@
 * Fixed some incorrect sentences and spellings in docs.
 * Added missing docs.
 * Fixed incorrect examples in docs.
+* Ability to edit pastes. (not fully done)
+* Renamed some modules.
+* Ability to delete pastes.
+* Added list of constants that have pastemyst's supported languages.
