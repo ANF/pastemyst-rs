@@ -578,7 +578,7 @@ pub mod paste {
     /// use pastemyst::paste::*;
     ///
     /// #[tokio::main]
-    /// fn main() -> PasteResult<()> {
+    /// async fn main() -> PasteResult<()> {
     ///     let paste_del_result = delete_paste(
     ///         "PasteID",
     ///         "Your PasteMyst Token. Get it from: https://paste.myst.rs/user/settings",
