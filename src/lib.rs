@@ -556,6 +556,46 @@ pub mod paste {
         Ok(result.status().as_u16())
     }
 
+    /// You can only delete pastes on your account, which
+    /// means you must also provide the authorization key.
+    /// This action is irreversible can the paste cannot
+    /// be restored in any way. This methods sends the
+    /// request asynchronously.
+    ///
+    /// This method returns an unsigned 16 bit integer
+    /// which is a status code recieved by the PasteMyst
+    /// server. If a paste deletes successfully, you
+    /// should recieve a status code of `200`. For
+    /// a list of all the web status codes, refer to:
+    /// https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
+    ///
+    /// ### API Docs
+    /// The relevent link to the API Documentation
+    /// is: https://paste.myst.rs/api-docs/paste
+    ///
+    /// ```rust
+    /// use pastemyst::paste::*;
+    ///
+    /// #[tokio::main]
+    /// fn main() -> PasteResult<()> {
+    ///     let paste_del_result = delete_paste(
+    ///         "PasteID",
+    ///         "Your PasteMyst Token. Get it from: https://paste.myst.rs/user/settings",
+    ///     ).await?;
+    ///     if (paste_del_result == 200) { println!("Paste has been deleted successfully."); }
+    ///     else { println!("Something went wrong and we recieved a status code of {}", paste_del_result); }
+    ///     Ok(())
+    /// }
+    /// ```
+    pub async fn delete_paste_async(id: &str, auth_token: &str) -> Result<u16, reqwest::Error> {
+        let result = reqwest::Client::builder()
+            .build()?
+            .delete(&parse_url(&id))
+            .header("Authorization", auth_token)
+            .send().await?;
+        Ok(result.status().as_u16())
+    }
+
     /// Parses the url by combining
     /// the `PASTE_ENDPOINT` with a
     /// provided id.
