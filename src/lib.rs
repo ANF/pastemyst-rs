@@ -487,9 +487,9 @@ pub mod paste {
     /// }
     /// ```
     pub async fn create_private_paste_async(
-        contents: CreateObject,
+        contents: &CreateObject,
         auth_token: &str,
-    ) -> Result<PasteObject, reqwest::Error> {
+    ) -> Result<PasteObject<'a>, reqwest::Error> {
         let content_type = reqwest::header::HeaderValue::from_static("application/json");
         let result = reqwest::Client::builder()
             .build()?
@@ -648,7 +648,6 @@ pub mod paste {
         /// Id of the pasty.
         pub _id: Option<String>,
         /// Language of the pasty.
-        #[serde(borrow)]
         pub language: &'a str,
         /// title of the pasty.
         pub title: Option<String>,
