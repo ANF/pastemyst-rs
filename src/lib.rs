@@ -503,7 +503,7 @@ pub mod paste {
     }
 
     // Under construction.
-    pub fn edit_paste(edit_info: &EditObject, id: &str, auth_token: &str) -> Result<(), reqwest::Error> {
+    pub(crate) fn edit_paste(edit_info: &EditObject, id: &str, auth_token: &str) -> Result<(), reqwest::Error> {
         println!("{}", &parse_url(&id));
         let content_type = reqwest::header::HeaderValue::from_static("application/json");
         let result = reqwest::blocking::Client::builder()
