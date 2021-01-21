@@ -391,7 +391,7 @@ pub mod paste {
     ///     Ok(())
     /// }
     /// ```
-    pub async fn create_paste_async(contents: CreateObject) -> Result<PasteObject<'static>, reqwest::Error> {
+    pub async fn create_paste_async(contents: CreateObject) -> Result<PasteObject, reqwest::Error> {
         let content_type = reqwest::header::HeaderValue::from_static("application/json");
         let result = reqwest::Client::builder()
             .build()?
@@ -577,7 +577,7 @@ pub mod paste {
     /// ```
     #[derive(Deserialize)]
     #[allow(non_snake_case, dead_code)]
-    pub struct PasteObject<'a> {
+    pub struct PasteObject {
         /// Id of the paste.
         pub _id: String,
         /// Id of the owner, if it doesn't
@@ -608,8 +608,7 @@ pub mod paste {
         pub tags: Vec<String>,
         /// List of pasties/files in
         /// the paste, can't be empty.
-        #[serde(borrow)]
-        pub pasties: Box<[PastyObject<'a>]>,
+        pub pasties: PastyObject,
         /// List of edits.
         pub edits: Vec<EditHistory>,
     }
@@ -644,24 +643,15 @@ pub mod paste {
     /// ```
     #[derive(Serialize, Deserialize)]
     #[allow(non_snake_case, dead_code)]
-    pub struct PastyObject<'a> {
+    pub struct PastyObject {
         /// Id of the pasty.
         pub _id: Option<String>,
         /// Language of the pasty.
-        #[serde(borrow)]
-        pub language: &'a str,
+        pub language: Option<String>,
         /// title of the pasty.
         pub title: Option<String>,
         /// contents of the pasty.
         pub code: Option<String>,
-    }
-
-    //impl Deserialize<'static> for PastyObject {
-        
-    //}
-
-    trait __PastyObject {
-        fn test() -> String;
     }
 
     /// Infomation about edits in a pasty in a paste.
