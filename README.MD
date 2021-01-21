@@ -58,22 +58,27 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 More from the [examples](./examples/) and [documentation](https://docs.rs/pastemyst-rs/*/).
 
 ### Feature support
-| Feature | Support | Async |
-| :----------- | :-----------: | -----------: |
-| API v1 | No | N/A |
-| API v2 | Yes | N/A |
-| Get pastes | Yes | Yes |
-| Get private pastes | Yes | Yes |
-| Create pastes | Yes | Yes |
-| Create Private pastes* | Yes | Yes |
-| Edit pastes | No | No |
-| Delete pastes | Yes | Yes |
-| Get Users | No | No |
-| Check if a user exists | No | No |
-| Get a language by name | No | No |
-| Get a language by extension | No | No |
+| Feature                     | Support   |  Async |
+| :-------------------------- | :-------: | -----: |
+| API v1                      | ✔         | ⛔    |
+| API v2                      | ✔         | ⛔    |
+| Get pastes                  | ✔         | ✔     |
+| Get private pastes          | ✔         | ✔     |
+| Create pastes               | ✔         | ✔     |
+| Create Private pastes*      | ✔         | ✔     |
+| Edit pastes                 | ❌        | ❌    |
+| Delete pastes               | ✔         | ✔     |
+| Get Users                   | ❌        | ❌    |
+| Check if a user exists      | ❌        | ❌    |
+| Get a language by name      | ❌        | ❌    |
+| Get a language by extension | ❌        | ❌    |
+
+✔ = Done/Implemented and fully functional
+❌ = Not done/implemented
+⛔ = N/A
 
 *This also includes a paste to be tied to your account, or create a private/public paste, or with tags.
+<!-- ✔ ❌ ⛔ -->
 
 ### Repository structure
 This is the current structure of the code:
