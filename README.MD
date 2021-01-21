@@ -67,7 +67,7 @@ More from the [examples](./examples/) and [documentation](https://docs.rs/pastem
 | Create pastes | Yes | Yes |
 | Create Private pastes* | Yes | Yes |
 | Edit pastes | No | No |
-| Delete pastes | Yes | No |
+| Delete pastes | Yes | Yes |
 | Get Users | No | No |
 | Check if a user exists | No | No |
 | Get a language by name | No | No |
