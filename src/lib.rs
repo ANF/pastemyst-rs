@@ -521,7 +521,8 @@ pub mod paste {
     /// You can only delete pastes on your account, which
     /// means you must also provide the authorization key.
     /// This action is irreversible can the paste cannot
-    /// be restored in any way.
+    /// be restored in any way. This methods sends the
+    /// request synchronously.
     ///
     /// This method returns an unsigned 16 bit integer
     /// which is a status code recieved by the PasteMyst
