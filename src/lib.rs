@@ -7,7 +7,7 @@ pub mod user {
             .build()?
             .get(&parse_user_get(username))
             .send()?;
-        let user_exists: bool;
+        let mut user_exists: bool = false;
         if result.status().as_u16() == 200 { user_exists = true; }
         else if result.status().as_u16() == 404 { user_exists = false; }
         Ok(user_exists)
