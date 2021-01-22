@@ -1,3 +1,17 @@
+#[allow(dead_code, unused_variables)]
+pub mod user {
+    const USER_ENDPOINT: &str = "https://paste.myst.rs/user/";
+
+    pub fn user_exits(username: &str) -> Result<bool, reqwest::Error> {
+        Ok(None)
+    }
+
+    /// Parses a user `GET` url endpoint.
+    fn parse_user(username: &str) -> String { return format!("{}{}", USER_ENDPOINT, username) }
+    /// Parses a user exists url endpoint.
+    fn parse_user_get(username: &str) -> String { return format!("{}{}/exists", USER_ENDPOINT, username) }
+}
+
 /// The paste namespace which contains
 /// every method and struct to
 /// `GET` and `POST` (send) a paste
