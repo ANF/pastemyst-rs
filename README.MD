@@ -69,7 +69,7 @@ More from the [examples](./examples/) and [documentation](https://docs.rs/pastem
 | Edit pastes                         | ❌        | ❌    |
 | Delete pastes                       | ✔         | ✔     |
 | Get Users                           | ❌        | ❌    |
-| Check if a user exists              | ❌        | ❌    |
+| Check if a user exists              | ✔        | ❌    |
 | Get a language by name              | ❌        | ❌    |
 | Get a language by extension         | ❌        | ❌    |
 | Time expires in to a unix timestamp | ❌        | ❌    |
