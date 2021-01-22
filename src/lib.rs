@@ -649,7 +649,7 @@ pub mod paste {
         pub tags: Vec<String>,
         /// List of pasties/files in
         /// the paste, can't be empty.
-        pub pasties: PastyObject,
+        pub pasties: Vec<PastyObject>,
         /// List of edits.
         pub edits: Vec<EditHistory>,
     }
