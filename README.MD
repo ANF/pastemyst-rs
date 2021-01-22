@@ -74,7 +74,9 @@ More from the [examples](./examples/) and [documentation](https://docs.rs/pastem
 | Get a language by extension | ❌        | ❌    |
 
 ✔ = Done/Implemented and fully functional
+
 ❌ = Not done/implemented
+
 ⛔ = N/A
 
 *This also includes a paste to be tied to your account, or create a private/public paste, or with tags.
