@@ -2,8 +2,15 @@
 pub mod user {
     const USER_ENDPOINT: &str = "https://paste.myst.rs/user/";
 
-    pub fn user_exits(username: &str) -> Result<bool, reqwest::Error> {
-        Ok(false)
+    pub fn user_exists(username: &str) -> Result<bool, reqwest::Error> {
+        let result = reqwest::blocking::Client::builder()
+            .build()?
+            .get(&parse_user_get(username))
+            .send()?;
+        let user_exists: bool;
+        if result.status().as_u16() == 200 { user_exists = true; }
+        else if result.status().as_u16() == 404 { user_exists = false; }
+        Ok(user_exists)
     }
 
     /// Parses a user `GET` url endpoint.
