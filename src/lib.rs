@@ -3,7 +3,7 @@ pub mod user {
     const USER_ENDPOINT: &str = "https://paste.myst.rs/user/";
 
     pub fn user_exits(username: &str) -> Result<bool, reqwest::Error> {
-        Ok(None)
+        Ok(false)
     }
 
     /// Parses a user `GET` url endpoint.
