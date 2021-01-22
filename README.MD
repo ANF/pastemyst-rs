@@ -58,20 +58,21 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 More from the [examples](./examples/) and [documentation](https://docs.rs/pastemyst-rs/*/).
 
 ### Feature support
-| Feature                     | Support   |  Async |
-| :-------------------------- | :-------: | -----: |
-| API v1                      | ✔         | ⛔    |
-| API v2                      | ✔         | ⛔    |
-| Get pastes                  | ✔         | ✔     |
-| Get private pastes          | ✔         | ✔     |
-| Create pastes               | ✔         | ✔     |
-| Create Private pastes*      | ✔         | ✔     |
-| Edit pastes                 | ❌        | ❌    |
-| Delete pastes               | ✔         | ✔     |
-| Get Users                   | ❌        | ❌    |
-| Check if a user exists      | ❌        | ❌    |
-| Get a language by name      | ❌        | ❌    |
-| Get a language by extension | ❌        | ❌    |
+| Feature                             | Support   |  Async |
+| :---------------------------------- | :-------: | -----: |
+| API v1                              | ✔         | ⛔    |
+| API v2                              | ✔         | ⛔    |
+| Get pastes                          | ✔         | ✔     |
+| Get private pastes                  | ✔         | ✔     |
+| Create pastes                       | ✔         | ✔     |
+| Create Private pastes*              | ✔         | ✔     |
+| Edit pastes                         | ❌        | ❌    |
+| Delete pastes                       | ✔         | ✔     |
+| Get Users                           | ❌        | ❌    |
+| Check if a user exists              | ❌        | ❌    |
+| Get a language by name              | ❌        | ❌    |
+| Get a language by extension         | ❌        | ❌    |
+| Time expires in to a unix timestamp | ❌        | ❌    |
 
 ✔ = Done/Implemented and fully functional
 
