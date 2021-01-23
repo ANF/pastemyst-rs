@@ -1,6 +1,8 @@
 /// h
 #[allow(dead_code, unused_variables)]
 pub mod user {
+    use serde::Deserialize;
+    
     /// The type provided by the pastemyst lib. It takes
     /// a type `T` and evalutates to that type and a
     /// `Result` like so: `Result<T, E>` where `E` has
@@ -36,6 +38,31 @@ pub mod user {
     fn parse_user(username: &str) -> String { return format!("{}{}", USER_ENDPOINT, username) }
     /// Parses a user exists url endpoint.
     fn parse_user_get(username: &str) -> String { return format!("{}{}/exists", USER_ENDPOINT, username) }
+
+    /// The user object that pastemyst provides.
+    /// It has all the public details of a user.
+    #[derive(Deserialize)]
+    #[allow(non_snake_case, dead_code, unused_doc_comments)]
+    pub struct UserObject {
+        /// Id of the user.
+        pub _id: String,
+        /// The username of the user.
+        pub username: String,
+        /// URL of the avatar image.
+        pub avatarUrl: String,
+        /// The default pasty language
+        /// of the user.
+        pub defaultLang: String,
+        /// If their profile is public
+        /// or not.
+        pub publicProfile: bool,
+        /* This part of the code is commented because
+           pastemyst does not return this value as stated
+           in the documentation right here:
+        /// How long has the user
+        /// been a supporter for, 0 if not a supporter
+        pub supporterLength: u32*/
+    }
 }
 
 /// The paste namespace which contains
