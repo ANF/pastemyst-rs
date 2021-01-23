@@ -135,6 +135,10 @@ pub mod user {
 
     /// The user object that pastemyst provides.
     /// It has all the public details of a user.
+    ///
+    /// ### API Docs
+    /// The relevent API documentation for this method is:
+    /// https://paste.myst.rs/api-docs/user
     #[derive(Deserialize)]
     #[allow(non_snake_case, dead_code, unused_doc_comments)]
     pub struct UserObject {
