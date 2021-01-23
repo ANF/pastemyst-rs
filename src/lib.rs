@@ -1,6 +1,13 @@
 /// h
 #[allow(dead_code, unused_variables)]
 pub mod user {
+    /// The type provided by the pastemyst lib. It takes
+    /// a type `T` and evalutates to that type and a
+    /// `Result` like so: `Result<T, E>` where `E` has
+    /// the default value of `reqwest::Error`. Keep note
+    /// that `E` can be overriden.
+    pub type UserResult<T, E = reqwest::Error> = Result<T, E>;
+
     const USER_ENDPOINT: &str = "https://paste.myst.rs/api/v2/user/";
 
     pub fn user_exists(username: &str) -> Result<bool, reqwest::Error> {
