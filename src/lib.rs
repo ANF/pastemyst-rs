@@ -20,6 +20,15 @@ pub mod user {
 
     const USER_ENDPOINT: &str = "https://paste.myst.rs/api/v2/user/";
 
+    /// Gets a user synchronously from [pastemyst](https://paste.myst.rs)
+    /// This information is stored in the `UserObject` struct. If a user
+    /// does not exist, it will return nothing and emit a console log
+    /// warning about the user not exist.
+    ///
+    /// As of now, there is no specific way to disable this warning
+    /// unless you compile your own version. This might change in
+    /// the future, but for now, a warning will be emmited if
+    /// it returns false
     pub fn get_user(username: &str) -> UserResult<UserObject> {
         if user_exists(username)? == false {
             print!("[pastemyst] The user '{}' does not exist and an empty object is returned.\n", username);            
