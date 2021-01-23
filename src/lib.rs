@@ -1,4 +1,12 @@
-/// h
+/// This is the user module which
+/// allows you to communicate with
+/// pastemyst's api to send `GET`
+/// requests to check if a user exists
+/// or not *and* `GET` user information.
+///
+/// ### API Docs
+/// The relevent API documentation for this method is:
+/// https://paste.myst.rs/api-docs/user
 #[allow(dead_code, unused_variables)]
 pub mod user {
     use serde::Deserialize;
