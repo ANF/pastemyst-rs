@@ -29,6 +29,10 @@ pub mod user {
     /// unless you compile your own version. This might change in
     /// the future, but for now, a warning will be emmited if
     /// it returns false
+    ///
+    /// ### API Docs
+    /// The relevent API documentation for this method is:
+    /// https://paste.myst.rs/api-docs/user
     pub fn get_user(username: &str) -> UserResult<UserObject> {
         if user_exists(username)? == false {
             print!("[pastemyst] The user '{}' does not exist and an empty object is returned.\n", username);            
