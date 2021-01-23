@@ -1,12 +1,24 @@
+/// h
 #[allow(dead_code, unused_variables)]
 pub mod user {
-    const USER_ENDPOINT: &str = "https://paste.myst.rs/user/";
+    const USER_ENDPOINT: &str = "https://paste.myst.rs/api/v2/user/";
 
     pub fn user_exists(username: &str) -> Result<bool, reqwest::Error> {
         let result = reqwest::blocking::Client::builder()
             .build()?
             .get(&parse_user_get(username))
             .send()?;
+        let mut user_exists: bool = false;
+        if result.status().as_u16() == 200 { user_exists = true; }
+        else if result.status().as_u16() == 404 { user_exists = false; }
+        Ok(user_exists)
+    }
+
+    pub async fn user_exists_async(username: &str) -> Result<bool, reqwest::Error> {
+        let result = reqwest::Client::builder()
+            .build()?
+            .get(&parse_user_get(username))
+            .send().await?;
         let mut user_exists: bool = false;
         if result.status().as_u16() == 200 { user_exists = true; }
         else if result.status().as_u16() == 404 { user_exists = false; }
@@ -24,7 +36,7 @@ pub mod user {
 /// `GET` and `POST` (send) a paste
 /// to [pastemyst](https://paste.myst.rs).
 ///
-/// ### [API Docs]
+/// ### API Docs
 /// Here is the official PasteMyst API
 /// documentation:
 /// https://paste.myst.rs/api-docs/index
