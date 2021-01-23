@@ -33,7 +33,7 @@ pub mod user {
         Ok(user_exists)
     }
 
-    pub async fn user_exists_async(username: &str) -> Result<bool, reqwest::Error> {
+    pub async fn user_exists_async(username: &str) -> UserResult<bool> {
         let result = reqwest::Client::builder()
             .build()?
             .get(&parse_user_get(username))
