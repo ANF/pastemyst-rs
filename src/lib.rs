@@ -23,6 +23,44 @@ pub mod user {
             .json()?;
         Ok(result)
     }
+
+    /// Sends a request to [pastemyst](https://paste.myst.rs)
+    /// to check if a user exists. If a user *does exist*,
+    /// it returns a value of `200` i.e, `true` else `false`.
+    /// This methods runs synchronously.
+    ///
+    /// The return value of this function is not to be confused
+    /// with an integer -- this method returns a boolean.
+    ///
+    /// ### API Docs
+    /// The relevent API documentation for this method is:
+    /// https://paste.myst.rs/api-docs/user
+    ///
+    /// ## Examples
+    ///
+    /// ```rust
+    /// use pastemyst::user::*;
+    ///
+    /// fn main() -> UserResult<()> {
+    ///     const USERNAME: &str = "ANF-Studios";
+    ///     let exists: bool = user_exists(USERNAME)?;
+    ///     print!("The user '{}' exists: {}", USERNAME, exists);
+    ///     Ok(())
+    /// }
+    /// ```
+    ///
+    /// ```rust
+    /// use pastemyst::user::*;
+    ///
+    /// fn main() -> Result<(), Box<dyn std::error::Error>> {
+    ///     const USERNAME: &str = "ANF-Studios";
+    ///     if user_exists(USERNAME)? == true {
+    ///         println!("{} does indeed exist!", USERNAME);
+    ///     } else { println!("{} was not found and does not exist.", USERNAME); }
+    ///     Ok(())
+    /// }
+    /// ```
+    pub fn user_exists(username: &str) -> UserResult<bool> {
         let result = reqwest::blocking::Client::builder()
             .build()?
             .get(&parse_user_get(username))
@@ -33,6 +71,44 @@ pub mod user {
         Ok(user_exists)
     }
 
+    /// Sends a request to [pastemyst](https://paste.myst.rs)
+    /// to check if a user exists. If a user *does exist*,
+    /// it returns a value of `200` i.e, `true` else `false`.
+    /// This methods runs asynchronously.
+    ///
+    /// The return value of this function is not to be confused
+    /// with an integer -- this method returns a boolean.
+    ///
+    /// ### API Docs
+    /// The relevent API documentation for this method is:
+    /// https://paste.myst.rs/api-docs/user
+    ///
+    /// ## Examples
+    ///
+    /// ```rust
+    /// use pastemyst::user::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() -> UserResult<()> {
+    ///     const USERNAME: &str = "ANF-Studios";
+    ///     let exists: bool = user_exists(USERNAME).await?;
+    ///     print!("The user '{}' exists: {}", USERNAME, exists);
+    ///     Ok(())
+    /// }
+    /// ```
+    ///
+    /// ```rust
+    /// use pastemyst::user::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    ///     const USERNAME: &str = "ANF-Studios";
+    ///     if user_exists(USERNAME).await? == true {
+    ///         println!("{} does indeed exist!", USERNAME);
+    ///     } else { println!("{} was not found and does not exist.", USERNAME); }
+    ///     Ok(())
+    /// }
+    /// ```
     pub async fn user_exists_async(username: &str) -> UserResult<bool> {
         let result = reqwest::Client::builder()
             .build()?
