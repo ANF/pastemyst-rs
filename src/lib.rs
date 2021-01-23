@@ -13,6 +13,16 @@ pub mod user {
     const USER_ENDPOINT: &str = "https://paste.myst.rs/api/v2/user/";
 
     pub fn user_exists(username: &str) -> Result<bool, reqwest::Error> {
+        if user_exists(username)? == false {
+            print!("[pastemyst] The user '{}' does not exist and an empty object is returned.\n", username);            
+        }
+        let result: UserObject = reqwest::blocking::Client::builder()
+            .build()?
+            .get(&parse_user(username))
+            .send()?
+            .json()?;
+        Ok(result)
+    }
         let result = reqwest::blocking::Client::builder()
             .build()?
             .get(&parse_user_get(username))
