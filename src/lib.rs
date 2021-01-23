@@ -33,6 +33,18 @@ pub mod user {
     /// ### API Docs
     /// The relevent API documentation for this method is:
     /// https://paste.myst.rs/api-docs/user
+    ///
+    /// ## Examples
+    ///
+    /// ```rust
+    /// use pastemyst::user::*;
+    ///
+    /// fn main() -> UserResult<()> {
+    ///     let user_data = get_user("ANF-Studios")?;
+    ///     println!("{:?}", user_data.defaultLang);
+    ///     Ok(())
+    /// }
+    /// ```
     pub fn get_user(username: &str) -> UserResult<UserObject> {
         if user_exists(username)? == false {
             print!("[pastemyst] The user '{}' does not exist and an empty object is returned.\n", username);            
