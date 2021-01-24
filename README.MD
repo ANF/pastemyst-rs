@@ -96,12 +96,8 @@ This is the current structure of the code:
 │       ├─ documentation.md
 │       └─ question.md
 ├───examples/
-│   ├─ create_paste_async.rs
-│   ├─ create_paste.rs
-│   ├─ get_paste_async.rs
-│   ├─ get_paste.rs
-│   ├─ get_private_paste_async.rs
-│   └─ get_private_paste.rs
+│   ├─ create_pastes.rs
+│   └─ get_pastes.rs
 ├───src/
 │   └─ lib.rs
 ├─── .gitattributes 
