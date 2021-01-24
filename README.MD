@@ -94,7 +94,7 @@ This is the current structure of the code:
 │       ├─ bug_report.md
 │       ├─ feature_request.md
 │       ├─ documentation.md
-│       └ question.md
+│       └─ question.md
 ├───examples/
 │   ├─ create_paste_async.rs
 │   ├─ create_paste.rs
