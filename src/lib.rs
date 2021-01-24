@@ -57,6 +57,32 @@ pub mod user {
         Ok(result)
     }
 
+    /// Gets a user asynchronously from [pastemyst](https://paste.myst.rs)
+    /// This information is stored in the `UserObject` struct. If a user
+    /// does not exist, it will return nothing and emit a console log
+    /// warning about the user not exist.
+    ///
+    /// As of now, there is no specific way to disable this warning
+    /// unless you compile your own version. This might change in
+    /// the future, but for now, a warning will be emmited if
+    /// it returns false
+    ///
+    /// ### API Docs
+    /// The relevent API documentation for this method is:
+    /// https://paste.myst.rs/api-docs/user
+    ///
+    /// ## Examples
+    ///
+    /// ```rust
+    /// use pastemyst::user::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() -> UserResult<()> {
+    ///     let user_data = get_user("ANF-Studios").await?;
+    ///     println!("{:?}", user_data._id);
+    ///     Ok(())
+    /// }
+    /// ```
     pub async fn get_user_async(username: &str) -> Result<UserObject, reqwest::Error> {
         if user_exists_async(username).await? == false {
             print!("[pastemyst] The user '{}' does not exist and an empty object is returned.\n", username);            
