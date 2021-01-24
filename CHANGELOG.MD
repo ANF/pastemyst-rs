@@ -10,7 +10,7 @@
 * Minor bug fixes and value changes.
 * Improvements and major additions to the documentation.
 
-### What's coming up? (currently done)
+### [v0.7.75](https://github.com/ANF/pastemyst-rs/releases/tag/0.7.75)
 * Ability to create private pastes.
 * Ability to create private pastes async.
 * Fixed `create_paste` and `create_paste_async`'s return type.
