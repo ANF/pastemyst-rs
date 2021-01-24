@@ -75,6 +75,7 @@ async fn call_create_paste_async() -> Result<()> {
 }
 
 /// Creates a private/owned paste synchronously.
+#[allow(dead_code)]
 fn call_create_private_paste(auth_token: &str) -> PasteResult<()> {
     let pasties: Vec<PastyObject> = vec![
         PastyObject {
@@ -109,6 +110,7 @@ fn call_create_private_paste(auth_token: &str) -> PasteResult<()> {
 }
 
 /// Creates a private/owned paste asynchronously.
+#[allow(dead_code)]
 async fn call_create_private_paste_async(auth_token: &str) -> PasteResult<()> {
     let pasties: Vec<PastyObject> = vec![
         PastyObject {
