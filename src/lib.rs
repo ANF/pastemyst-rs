@@ -57,6 +57,18 @@ pub mod user {
         Ok(result)
     }
 
+    pub async fn get_user_async(username: &str) -> Result<UserObject, reqwest::Error> {
+        if user_exists_async(username).await? == false {
+            print!("[pastemyst] The user '{}' does not exist and an empty object is returned.\n", username);            
+        }
+        let result: UserObject = reqwest::Client::builder()
+            .build()?
+            .get(&parse_user(username))
+            .send().await?
+            .json().await?;
+        Ok(result)
+    }
+
     /// Sends a request to [pastemyst](https://paste.myst.rs)
     /// to check if a user exists. If a user *does exist*,
     /// it returns a value of `200` i.e, `true` else `false`.
