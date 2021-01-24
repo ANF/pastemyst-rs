@@ -22,3 +22,5 @@
 * Renamed some modules.
 * Ability to delete pastes.
 * Added list of constants that have pastemyst's supported languages.
+* Ability to check if user exists
+* Ability to get users
