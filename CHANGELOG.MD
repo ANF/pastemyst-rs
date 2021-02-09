@@ -10,7 +10,7 @@
 * Minor bug fixes and value changes.
 * Improvements and major additions to the documentation.
 
-### What's coming up? (currently done)
+### [v0.7.75](https://github.com/ANF/pastemyst-rs/releases/tag/0.7.75)
 * Ability to create private pastes.
 * Ability to create private pastes async.
 * Fixed `create_paste` and `create_paste_async`'s return type.
@@ -24,3 +24,10 @@
 * Added list of constants that have pastemyst's supported languages.
 * Ability to check if user exists
 * Ability to get users
+
+### [0.8.8](https://github.com/ANF/pastemyst-rs/releases/tag/0.8.0)
+* Completed user module.
+* Completed paste module.
+* Added examples.
+* Added macro.
+* PastyObject no longer has the optional fields
