@@ -253,6 +253,11 @@ pub mod paste {
     /// }
     /// ```
     pub type PasteResult<T, E = Box<dyn std::error::Error>> = std::result::Result<T, E>;
+    #[macro_export]
+    macro_rules! str {
+        {$value:expr} => (String::from($value));
+    }
+
     /// An enum of PasteMyt language constants.
     //#[allow(non_camel_case_types)]
     pub mod language {
