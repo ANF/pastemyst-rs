@@ -29,16 +29,16 @@ use pastemyst::paste::PasteObject;
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let pasties: Vec<PastyObject> = vec![
         PastyObject {
-            _id: None,
-            title: Some(String::from("A pasty title")),
-            language: Some(String::from("autodetect")),
-            code: Some(String::from("fn main() { println!(\"Hello World!\"); }")),
+            _id: str!(""),
+            language: str!(pastemyst::paste::language::RUST),
+            title: "A pasty title".to_string(),
+            code: String::from("fn main() { println!(\"Hello World!\"); }"),
         },
         PastyObject {
-            _id: None,
-            title: Some(String::from("Another pasty title")),
-            language: Some(String::from("autodetect")),
-            code: Some(String::from("#include \"stdio.h\"\n\nint main() {\n\tprintf(\"Hello World!\");\n}")),
+            _id: str!(""),
+            title: "Another pasty title".to_string(),
+            language: str!(pastemyst::paste::language::CLANG),
+            code: String::from("#include \"stdio.h\"\n\nint main() {\n\tprintf(\"Hello World!\");\n}"),
         },
     ];
     let data: CreateObject = CreateObject {
@@ -47,7 +47,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         isPrivate: false,
         isPublic: false,
         tags: String::from(""),
-        pasties,
+        pasties: pasties,
     };
     let paste: /*reqwest::Response*/ = paste::create_paste(data).unwrap(); // You don't need to add the commented part, that's jut for your information.
     println!("{}", paste._id);

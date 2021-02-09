@@ -1,4 +1,4 @@
-use pastemyst::paste;
+use pastemyst::str;
 use pastemyst::paste::*;
 
 type Error = Box<dyn std::error::Error>;
@@ -20,16 +20,16 @@ async fn main() -> Result<()> {
 fn call_create_paste() -> Result<(), reqwest::Error> /*PasteResult<()>*/ {
     let pasties: Vec<PastyObject> = vec![
         PastyObject {
-            _id: None,
-            language: Some(String::from("autodetect")),
-            title: Some(String::from("A pasty title")),
-            code: Some(String::from("fn main() { println!(\"Hello World!\"); }")),
+            _id: str!(""),
+            language: str!(pastemyst::paste::language::RUST),
+            title: "A pasty title".to_string(),
+            code: String::from("fn main() { println!(\"Hello World!\"); }"),
         },
         PastyObject {
-            _id: None,
-            title: Some(String::from("Another pasty title")),
-            language: Some(String::from("autodetect")),
-            code: Some(String::from("#include \"stdio.h\"\n\nint main() {\n\tprintf(\"Hello World!\");\n}")),
+            _id: str!(""),
+            title: "Another pasty title".to_string(),
+            language: str!(pastemyst::paste::language::CLANG),
+            code: String::from("#include \"stdio.h\"\n\nint main() {\n\tprintf(\"Hello World!\");\n}"),
         },
     ];
     let data: CreateObject = CreateObject {
@@ -49,16 +49,16 @@ fn call_create_paste() -> Result<(), reqwest::Error> /*PasteResult<()>*/ {
 async fn call_create_paste_async() -> Result<()> {
     let pasties: Vec<PastyObject> = vec![
         PastyObject {
-            _id: None,
-            language: Some(String::from("autodetect")),
-            title: Some(String::from("A pasty title")),
-            code: Some(String::from("fn main() { println!(\"Hello World!\"); }")),
+            _id: str!(""),
+            language: str!(pastemyst::paste::language::RUST),
+            title: "A pasty title".to_string(),
+            code: String::from("fn main() { println!(\"Hello World!\"); }"),
         },
         PastyObject {
-            _id: None,
-            title: Some(String::from("Another pasty title")),
-            language: Some(String::from("autodetect")),
-            code: Some(String::from("#include \"stdio.h\"\n\nint main() {\n\tprintf(\"Hello World!\");\n}")),
+            _id: str!(""),
+            title: "Another pasty title".to_string(),
+            language: str!(pastemyst::paste::language::CLANG),
+            code: String::from("#include \"stdio.h\"\n\nint main() {\n\tprintf(\"Hello World!\");\n}"),
         },
     ];
     let data: CreateObject = CreateObject {
@@ -69,7 +69,7 @@ async fn call_create_paste_async() -> Result<()> {
         tags: String::from(""),
         pasties,
     };
-    let paste = paste::create_paste_async(data).await?;
+    let paste = create_paste_async(data).await?;
     println!("https://paste.myst.rs/{}", paste._id);
     Ok(())
 }
@@ -79,18 +79,16 @@ async fn call_create_paste_async() -> Result<()> {
 fn call_create_private_paste(auth_token: &str) -> PasteResult<()> {
     let pasties: Vec<PastyObject> = vec![
         PastyObject {
-            _id: None,
-            language: Some(String::from("autodetect")),
-            title: Some(String::from("A pasty title")),
-            code: Some(String::from("fn main() { println!(\"Hello World!\"); }")),
+            _id: str!(""),
+            language: str!(pastemyst::paste::language::RUST),
+            title: "A pasty title".to_string(),
+            code: String::from("fn main() { println!(\"Hello World!\"); }"),
         },
         PastyObject {
-            _id: None,
-            title: Some(String::from("Another pasty title")),
-            language: Some(String::from("autodetect")),
-            code: Some(String::from(
-                "#include \"stdio.h\"\n\nint main() {\n\tprintf(\"Hello World!\");\n}",
-            )),
+            _id: str!(""),
+            title: "Another pasty title".to_string(),
+            language: str!(pastemyst::paste::language::CLANG),
+            code: String::from("#include \"stdio.h\"\n\nint main() {\n\tprintf(\"Hello World!\");\n}"),
         },
     ];
     let data: CreateObject = CreateObject {
@@ -114,18 +112,16 @@ fn call_create_private_paste(auth_token: &str) -> PasteResult<()> {
 async fn call_create_private_paste_async(auth_token: &str) -> PasteResult<()> {
     let pasties: Vec<PastyObject> = vec![
         PastyObject {
-            _id: None,
-            language: Some(String::from("autodetect")),
-            title: Some(String::from("A pasty title")),
-            code: Some(String::from("fn main() { println!(\"Hello World!\"); }")),
+            _id: str!(""),
+            language: str!(pastemyst::paste::language::RUST),
+            title: "A pasty title".to_string(),
+            code: String::from("fn main() { println!(\"Hello World!\"); }"),
         },
         PastyObject {
-            _id: None,
-            title: Some(String::from("Another pasty title")),
-            language: Some(String::from("autodetect")),
-            code: Some(String::from(
-                "#include \"stdio.h\"\n\nint main() {\n\tprintf(\"Hello World!\");\n}",
-            )),
+            _id: str!(""),
+            title: "Another pasty title".to_string(),
+            language: str!(pastemyst::paste::language::CLANG),
+            code: String::from("#include \"stdio.h\"\n\nint main() {\n\tprintf(\"Hello World!\");\n}"),
         },
     ];
     let data: CreateObject = CreateObject {
