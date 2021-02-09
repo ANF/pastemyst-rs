@@ -752,6 +752,47 @@ pub mod paste {
         Ok(result.json().await?)
     }
 
+    /// Sends a request to pastemyst to edit a
+    /// specific paste. You need to provide the
+    /// `EditObject` struct i.e, whatever you
+    /// want to edit. This is a synchronous method.
+    ///
+    /// An important note, the pasty will **NOT**
+    /// be edited if you do not supply the id
+    /// (or the correct id) of the pasty. PasteMyst
+    /// needs to know which pasty to edit exactly.
+    ///
+    /// The API does not allow you to append more
+    /// pastes as of this version writing this,
+    /// you can only append pastes when editing
+    /// within the site itself as the user.
+    /// 
+    /// ## Examples
+    ///
+    /// ```rust
+    /// use pastemyst::str;
+    /// use pastemyst::paste;
+    ///
+    /// fn main() {
+    ///     let pasties = vec![pastemyst::paste::PastyObject {
+    ///         _id: str!("PastyID"),
+    ///         code: String::from("print('Hello World!')"),
+    ///         language: str!(pastemyst::paste::language::PYTHON),
+    ///         title: "Pasty Title".to_string(),
+    ///     }];
+    ///     let edit_object = pastemyst::paste::EditObject {
+    ///         isPrivate: false,
+    ///         isPublic: false,
+    ///         pasties: pasties,
+    ///         tags: str!("Hello, World"),
+    ///         title: str!("My title")
+    ///     };
+    ///     let paste_result: PasteObject = paste::edit_paste(edit_object,
+    ///         "PasteID",
+    ///         "Your PasteMyst Token. Get it from: https://paste.myst.rs/user/settings",
+    ///     )?;
+    /// }
+    /// ```
     pub fn edit_paste(edit_info: EditObject, id: &str, auth_token: &str) -> Result<PasteObject, reqwest::Error> {
         let content_type = reqwest::header::HeaderValue::from_static("application/json");
         let result = reqwest::blocking::Client::builder()
@@ -763,6 +804,49 @@ pub mod paste {
             .send()?;
         Ok(result.json()?)
     }
+
+    /// Sends a request to pastemyst to edit a
+    /// specific paste. You need to provide the
+    /// `EditObject` struct i.e, whatever you
+    /// want to edit. This is a asynchronous method.
+    ///
+    /// An important note, the pasty will **NOT**
+    /// be edited if you do not supply the id
+    /// (or the correct id) of the pasty. PasteMyst
+    /// needs to know which pasty to edit exactly.
+    ///
+    /// The API does not allow you to append more
+    /// pastes as of this version writing this,
+    /// you can only append pastes when editing
+    /// within the site itself as the user.
+    /// 
+    /// ## Examples
+    ///
+    /// ```rust
+    /// use pastemyst::str;
+    /// use pastemyst::paste;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let pasties = vec![pastemyst::paste::PastyObject {
+    ///         _id: str!("PastyID"),
+    ///         code: String::from("print('Hello World!')"),
+    ///         language: str!(pastemyst::paste::language::PYTHON),
+    ///         title: "Pasty Title".to_string(),
+    ///     }];
+    ///     let edit_object = pastemyst::paste::EditObject {
+    ///         isPrivate: false,
+    ///         isPublic: false,
+    ///         pasties: pasties,
+    ///         tags: str!("Hello, World"),
+    ///         title: str!("My title")
+    ///     };
+    ///     let paste_result: PasteObject = paste::edit_paste(edit_object,
+    ///         "PasteID",
+    ///         "Your PasteMyst Token. Get it from: https://paste.myst.rs/user/settings",
+    ///     ).await?;
+    /// }
+    /// ```
     pub async fn edit_paste_async(edit_info: EditObject, id: &str, auth_token: &str) -> Result<PasteObject, reqwest::Error> {
         let content_type = reqwest::header::HeaderValue::from_static("application/json");
         let result = reqwest::Client::builder()
