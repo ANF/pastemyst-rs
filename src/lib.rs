@@ -752,9 +752,7 @@ pub mod paste {
         Ok(result.json().await?)
     }
 
-    // Under construction.
-    pub(crate) fn edit_paste(edit_info: &EditObject, id: &str, auth_token: &str) -> Result<(), reqwest::Error> {
-        println!("{}", &parse_url(&id));
+    pub fn edit_paste(edit_info: EditObject, id: &str, auth_token: &str) -> Result<PasteObject, reqwest::Error> {
         let content_type = reqwest::header::HeaderValue::from_static("application/json");
         let result = reqwest::blocking::Client::builder()
             .build()?
@@ -763,9 +761,8 @@ pub mod paste {
             .header(reqwest::header::CONTENT_TYPE, content_type)
             .body(serde_json::to_string(&edit_info).unwrap())
             .send()?;
-        print!("Result: ");
-        println!("{:?}", result.text()?);
-        Ok(())
+        Ok(result.json()?)
+    }
     }
 
     /// You can only delete pastes on your account, which
