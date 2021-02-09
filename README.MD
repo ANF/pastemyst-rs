@@ -66,7 +66,7 @@ More from the [examples](./examples/) and [documentation](https://docs.rs/pastem
 | Get private pastes                  | ✔         | ✔     |
 | Create pastes                       | ✔         | ✔     |
 | Create Private pastes*              | ✔         | ✔     |
-| Edit pastes                         | ❌        | ❌    |
+| Edit pastes                         | ✔         | ✔     |
 | Delete pastes                       | ✔         | ✔     |
 | Get Users                           | ✔         | ✔     |
 | Check if a user exists              | ✔         | ✔     |
