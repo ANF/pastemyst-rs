@@ -253,6 +253,28 @@ pub mod paste {
     /// }
     /// ```
     pub type PasteResult<T, E = Box<dyn std::error::Error>> = std::result::Result<T, E>;
+
+    /// This macro can assist prevention of
+    /// converting an str to a String and
+    /// calling that method each time.
+    ///
+    /// It can be used for other purposes
+    /// if you wish to, but it's designed
+    /// to work with any struct field that
+    /// takes in a String type. Not necessarily
+    /// recommened to be used however you can
+    /// if you wish to but it's not compulsory.
+    ///
+    /// You can also use other macros like
+    /// methods like `String::from` or even
+    /// `to_string()` if you wish to.
+    ///
+    /// This method calls the `String::from` method.
+    #[macro_export]
+    macro_rules! str {
+        {$value:expr} => (String::from($value));
+    }
+
     /// An enum of PasteMyt language constants.
     //#[allow(non_camel_case_types)]
     pub mod language {
@@ -730,9 +752,48 @@ pub mod paste {
         Ok(result.json().await?)
     }
 
-    // Under construction.
-    pub(crate) fn edit_paste(edit_info: &EditObject, id: &str, auth_token: &str) -> Result<(), reqwest::Error> {
-        println!("{}", &parse_url(&id));
+    /// Sends a request to pastemyst to edit a
+    /// specific paste. You need to provide the
+    /// `EditObject` struct i.e, whatever you
+    /// want to edit. This is a synchronous method.
+    ///
+    /// An important note, the pasty will **NOT**
+    /// be edited if you do not supply the id
+    /// (or the correct id) of the pasty. PasteMyst
+    /// needs to know which pasty to edit exactly.
+    ///
+    /// The API does not allow you to append more
+    /// pastes as of this version writing this,
+    /// you can only append pastes when editing
+    /// within the site itself as the user.
+    /// 
+    /// ## Examples
+    ///
+    /// ```rust
+    /// use pastemyst::str;
+    /// use pastemyst::paste;
+    ///
+    /// fn main() {
+    ///     let pasties = vec![pastemyst::paste::PastyObject {
+    ///         _id: str!("PastyID"),
+    ///         code: String::from("print('Hello World!')"),
+    ///         language: str!(pastemyst::paste::language::PYTHON),
+    ///         title: "Pasty Title".to_string(),
+    ///     }];
+    ///     let edit_object = pastemyst::paste::EditObject {
+    ///         isPrivate: false,
+    ///         isPublic: false,
+    ///         pasties: pasties,
+    ///         tags: str!("Hello, World"),
+    ///         title: str!("My title")
+    ///     };
+    ///     let paste_result: PasteObject = paste::edit_paste(edit_object,
+    ///         "PasteID",
+    ///         "Your PasteMyst Token. Get it from: https://paste.myst.rs/user/settings",
+    ///     )?;
+    /// }
+    /// ```
+    pub fn edit_paste(edit_info: EditObject, id: &str, auth_token: &str) -> Result<PasteObject, reqwest::Error> {
         let content_type = reqwest::header::HeaderValue::from_static("application/json");
         let result = reqwest::blocking::Client::builder()
             .build()?
@@ -741,9 +802,61 @@ pub mod paste {
             .header(reqwest::header::CONTENT_TYPE, content_type)
             .body(serde_json::to_string(&edit_info).unwrap())
             .send()?;
-        print!("Result: ");
-        println!("{:?}", result.text()?);
-        Ok(())
+        Ok(result.json()?)
+    }
+
+    /// Sends a request to pastemyst to edit a
+    /// specific paste. You need to provide the
+    /// `EditObject` struct i.e, whatever you
+    /// want to edit. This is a asynchronous method.
+    ///
+    /// An important note, the pasty will **NOT**
+    /// be edited if you do not supply the id
+    /// (or the correct id) of the pasty. PasteMyst
+    /// needs to know which pasty to edit exactly.
+    ///
+    /// The API does not allow you to append more
+    /// pastes as of this version writing this,
+    /// you can only append pastes when editing
+    /// within the site itself as the user.
+    /// 
+    /// ## Examples
+    ///
+    /// ```rust
+    /// use pastemyst::str;
+    /// use pastemyst::paste;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let pasties = vec![pastemyst::paste::PastyObject {
+    ///         _id: str!("PastyID"),
+    ///         code: String::from("print('Hello World!')"),
+    ///         language: str!(pastemyst::paste::language::PYTHON),
+    ///         title: "Pasty Title".to_string(),
+    ///     }];
+    ///     let edit_object = pastemyst::paste::EditObject {
+    ///         isPrivate: false,
+    ///         isPublic: false,
+    ///         pasties: pasties,
+    ///         tags: str!("Hello, World"),
+    ///         title: str!("My title")
+    ///     };
+    ///     let paste_result: PasteObject = paste::edit_paste(edit_object,
+    ///         "PasteID",
+    ///         "Your PasteMyst Token. Get it from: https://paste.myst.rs/user/settings",
+    ///     ).await?;
+    /// }
+    /// ```
+    pub async fn edit_paste_async(edit_info: EditObject, id: &str, auth_token: &str) -> Result<PasteObject, reqwest::Error> {
+        let content_type = reqwest::header::HeaderValue::from_static("application/json");
+        let result = reqwest::Client::builder()
+            .build()?
+            .patch(&parse_url(&id))
+            .header("Authorization", auth_token)
+            .header(reqwest::header::CONTENT_TYPE, content_type)
+            .body(serde_json::to_string(&edit_info).unwrap())
+            .send().await?;
+        Ok(result.json().await?)
     }
 
     /// You can only delete pastes on your account, which
@@ -914,13 +1027,13 @@ pub mod paste {
     #[allow(non_snake_case, dead_code)]
     pub struct PastyObject {
         /// Id of the pasty.
-        pub _id: Option<String>,
+        pub _id: String,
         /// Language of the pasty.
-        pub language: Option<String>,
+        pub language: String,
         /// title of the pasty.
-        pub title: Option<String>,
+        pub title: String,
         /// contents of the pasty.
-        pub code: Option<String>,
+        pub code: String,
     }
 
     /// Infomation about edits in a pasty in a paste.

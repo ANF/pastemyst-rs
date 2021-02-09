@@ -24,3 +24,10 @@
 * Added list of constants that have pastemyst's supported languages.
 * Ability to check if user exists
 * Ability to get users
+
+### [0.8.8](https://github.com/ANF/pastemyst-rs/releases/tag/0.8.0)
+* Completed user module.
+* Completed paste module.
+* Added examples.
+* Added macro.
+* PastyObject no longer has the optional fields
