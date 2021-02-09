@@ -4,7 +4,6 @@ version = "0.8.0"
 authors = ["ANF-Studios <anforg@outlook.com>"]
 edition = "2018"
 license = "MIT"
-license-file = "LICENSE"
 keywords = ["pastemyst", "pastemyst-rs", "pastemystrs", "api-wrapper"]
 description = "An API wrapper for pastemyst written in Rust"
 repository = "https://github.com/ANF/pastemyst-rs"
