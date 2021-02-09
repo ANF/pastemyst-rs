@@ -96,8 +96,8 @@ This is the current structure of the code:
 │       ├─ documentation.md
 │       └─ question.md
 ├───examples/
-│   ├─ create_pastes.rs
-│   └─ get_pastes.rs
+│   ├─ paste.rs
+│   └─ user.rs
 ├───src/
 │   └─ lib.rs
 ├─── .gitattributes 
