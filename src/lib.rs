@@ -763,6 +763,16 @@ pub mod paste {
             .send()?;
         Ok(result.json()?)
     }
+    pub async fn edit_paste_async(edit_info: EditObject, id: &str, auth_token: &str) -> Result<PasteObject, reqwest::Error> {
+        let content_type = reqwest::header::HeaderValue::from_static("application/json");
+        let result = reqwest::Client::builder()
+            .build()?
+            .patch(&parse_url(&id))
+            .header("Authorization", auth_token)
+            .header(reqwest::header::CONTENT_TYPE, content_type)
+            .body(serde_json::to_string(&edit_info).unwrap())
+            .send().await?;
+        Ok(result.json().await?)
     }
 
     /// You can only delete pastes on your account, which
