@@ -106,6 +106,30 @@ pub mod time {
         } else { println!("[pastemyst] The given expires timestamp is not valid and 0 will be returned."); }
         Ok(response.result)
     }
+    pub async fn expires_into_unix_async(created_at: u64, expires_in: &str) -> TimeResult<u64> {
+        let mut response: TimeObject = TimeObject { result: 0 };
+        #[allow(unused_assignments)] let mut valid_time: bool = false;
+        match expires_in {
+            expires_in::NEVER => valid_time = true,
+            expires_in::ONE_HOUR => valid_time = true,
+            expires_in::TWO_HOURS => valid_time = true,
+            expires_in::ONE_DAY => valid_time = true,
+            expires_in::TWO_DAYS => valid_time = true,
+            expires_in::ONE_WEEK => valid_time = true,
+            expires_in::ONE_MONTH => valid_time = true,
+            expires_in::ONE_YEAR => valid_time = true,
+            _ => valid_time = false
+        }
+        if valid_time {
+            response = reqwest::Client::builder()
+                .build()?
+                .get(&parse_time(created_at, expires_in))
+                .send().await?
+                .json().await?;
+        } else { println!("[pastemyst] The given expires timestamp is not valid and 0 will be returned."); }
+        Ok(response.result)
+    }
+
     /// This struct is only here so
     /// that the json object recieved
     /// from the API can be serialized
