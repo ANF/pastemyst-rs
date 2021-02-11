@@ -57,32 +57,32 @@ pub mod time {
         /// from the physical drive
         /// though chances are extremely
         /// slim.
-        const NEVER: &str = "never";
+        pub const NEVER: &str = "never";
         /// The paste will expire in
         /// an hour.
-        const ONE_HOUR: &str = "1h";
+        pub const ONE_HOUR: &str = "1h";
         /// The paste will expire in
         /// two hours.
-        const TWO_HOURS: &str = "2h";
+        pub const TWO_HOURS: &str = "2h";
         /// The paste will expire in
         /// ten hours.
-        const TEN_HOURS: &str = "10h";
+        pub const TEN_HOURS: &str = "10h";
         /// The paste will expire in
         /// one day (24 hours).
-        const ONE_DAY: &str = "1d";
+        pub const ONE_DAY: &str = "1d";
         /// The paste will expire in
         /// two days (48 hours).
-        const TWO_DAYS: &str = "2d";
+        pub const TWO_DAYS: &str = "2d";
         /// The paste will expire in
         /// a week (168 hours).
-        const ONE_WEEK: &str = "1w";
+        pub const ONE_WEEK: &str = "1w";
         /// The paste will expire in
         /// a month (~672 hours).
-        const ONE_MONTH: &str = "1m";
+        pub const ONE_MONTH: &str = "1m";
         /// The paste will expire in
         /// a whole year (~8736 hours,
         /// followed by solar calander).
-        const ONE_YEAR: &str = "1y";
+        pub const ONE_YEAR: &str = "1y";
     }
 }
 
