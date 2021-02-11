@@ -37,6 +37,12 @@ macro_rules! str {
 /// https://paste.myst.rs/api-docs/time
 #[allow(dead_code, unused_variables)]
 pub mod time {
+    /// The type provided by the pastemyst lib. It takes
+    /// a type `T` and evalutates to that type and a
+    /// `Result` like so: `Result<T, E>` where `E` has
+    /// the default value of `reqwest::Error`. Keep note
+    /// that `E` can be overriden.
+    pub type TimeResult<T, E = reqwest::Error> = Result<T, E>;
     /// All the possible values of the
     /// expiration of a paste provided
     /// by PasteMyst's API v2.
