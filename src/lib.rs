@@ -19,6 +19,11 @@ macro_rules! str {
     {$value:expr} => (String::from($value));
 }
 
+#[allow(dead_code, unused_variables)]
+pub mod time {
+
+}
+
 /// This is the user module which
 /// allows you to communicate with
 /// pastemyst's api to send `GET`
