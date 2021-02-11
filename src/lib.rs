@@ -72,7 +72,9 @@ pub mod user {
             username: str!(""),
             avatarUrl: str!(""),
             defaultLang: str!(""),
-            publicProfile: false
+            publicProfile: false,
+            supporterLength: 0,
+            contributor: false
         };
         if user_exists(username)? == false {
             print!("[pastemyst] The user '{}' does not exist and an empty object is returned.\n", username);            
@@ -118,7 +120,9 @@ pub mod user {
             username: str!(""),
             avatarUrl: str!(""),
             defaultLang: str!(""),
-            publicProfile: false
+            publicProfile: false,
+            supporterLength: 0,
+            contributor: false
         };
         if user_exists_async(username).await? == false {
             print!("[pastemyst] The user '{}' does not exist and an empty object is returned.\n", username);            
