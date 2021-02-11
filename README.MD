@@ -113,12 +113,12 @@ Being a Rust library, pastemyst-rs requires the Rust compiler installed. To chec
 2. Run from the examples using `cargo run --example example_name`, for example `cargo run --example get_paste`.
 
 #### Installation
-If you want to use it in your rust application, it is recommended to get the crate from https://crates.io/crates/pastemyst-rs.
+If you want to use it in your rust application, it is recommended to get the crate from https://crates.io/crates/pastemyst.
 In your `Cargo.toml` file, under `[dependencies]` paste this:
 ```toml
-pastemyst-rs = "<Replace this text with the latest version>"
+pastemyst = "<Replace this text with the latest version>"
 # OR
-pastemyst-rs = { version = "<Replace this text with the latest version>" }
+pastemyst = { version = "<Replace this text with the latest version>" }
 ```
 
 ### Versioning
