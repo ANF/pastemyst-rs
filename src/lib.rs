@@ -96,6 +96,14 @@ pub mod time {
     /// struct has been kept private.
     #[derive(Deserialize)]
     struct TimeObject { result: u64 }
+
+    /// Parses the time module's API path
+    fn parse_time(created_at: u64, expires_in: &str) -> String {
+        return format!(
+            "{}?createdAt={}&expiresIn={}",
+            TIME_ENDPOINT, created_at, expires_in
+        )
+    }
 }
 
 /// This is the user module which
