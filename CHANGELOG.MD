@@ -31,3 +31,9 @@
 * Added examples.
 * Added macro.
 * PastyObject no longer has the optional fields
+
+### Coming up
+* Minor bug fixes.
+* Documentation improvements.
+* Added more fields in UserObject.
+* Fixed a bug where if a user does not exist, crate panics, now it returns an empty struct.
