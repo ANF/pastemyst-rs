@@ -37,6 +37,8 @@ macro_rules! str {
 /// https://paste.myst.rs/api-docs/time
 #[allow(dead_code, unused_variables)]
 pub mod time {
+    use serde::Deserialize;
+
     /// The type provided by the pastemyst lib. It takes
     /// a type `T` and evalutates to that type and a
     /// `Result` like so: `Result<T, E>` where `E` has
@@ -84,6 +86,16 @@ pub mod time {
         /// followed by solar calander).
         pub const ONE_YEAR: &str = "1y";
     }
+    /// This struct is only here so
+    /// that the json object recieved
+    /// from the API can be serialized
+    /// for the variable to be extracted
+    /// and be returned directly instead
+    /// of the struct itself for ease.
+    /// This is the main reason why this
+    /// struct has been kept private.
+    #[derive(Deserialize)]
+    struct TimeObject { result: u64 }
 }
 
 /// This is the user module which
