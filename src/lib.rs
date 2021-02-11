@@ -78,7 +78,7 @@ pub mod user {
     ///
     /// #[tokio::main]
     /// async fn main() -> UserResult<()> {
-    ///     let user_data = get_user("ANF-Studios").await?;
+    ///     let user_data = get_user_async("ANF-Studios").await?;
     ///     println!("{:?}", user_data._id);
     ///     Ok(())
     /// }
