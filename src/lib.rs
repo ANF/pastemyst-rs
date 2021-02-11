@@ -67,14 +67,22 @@ pub mod user {
     /// }
     /// ```
     pub fn get_user(username: &str) -> UserResult<UserObject> {
+        let mut result: UserObject = UserObject {
+            _id: str!(""),
+            username: str!(""),
+            avatarUrl: str!(""),
+            defaultLang: str!(""),
+            publicProfile: false
+        };
         if user_exists(username)? == false {
             print!("[pastemyst] The user '{}' does not exist and an empty object is returned.\n", username);            
+        } else {
+            result = reqwest::blocking::Client::builder()
+                .build()?
+                .get(&parse_user(username))
+                .send()?
+                .json()?;
         }
-        let result: UserObject = reqwest::blocking::Client::builder()
-            .build()?
-            .get(&parse_user(username))
-            .send()?
-            .json()?;
         Ok(result)
     }
 
@@ -105,14 +113,22 @@ pub mod user {
     /// }
     /// ```
     pub async fn get_user_async(username: &str) -> Result<UserObject, reqwest::Error> {
+        let mut result: UserObject = UserObject {
+            _id: str!(""),
+            username: str!(""),
+            avatarUrl: str!(""),
+            defaultLang: str!(""),
+            publicProfile: false
+        };
         if user_exists_async(username).await? == false {
             print!("[pastemyst] The user '{}' does not exist and an empty object is returned.\n", username);            
+        } else {
+            result = reqwest::Client::builder()
+                .build()?
+                .get(&parse_user(username))
+                .send().await?
+                .json().await?;
         }
-        let result: UserObject = reqwest::Client::builder()
-            .build()?
-            .get(&parse_user(username))
-            .send().await?
-            .json().await?;
         Ok(result)
     }
 
