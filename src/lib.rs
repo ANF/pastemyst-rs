@@ -31,7 +31,8 @@ pub mod time {
 /// or not *and* `GET` user information.
 ///
 /// ### API Docs
-/// The relevent API documentation for this method is:
+/// The relevent API documentation for
+/// this module is:
 /// https://paste.myst.rs/api-docs/user
 #[allow(dead_code, unused_variables)]
 pub mod user {
@@ -289,9 +290,9 @@ pub mod user {
 /// to [pastemyst](https://paste.myst.rs).
 ///
 /// ### API Docs
-/// Here is the official PasteMyst API
-/// documentation:
-/// https://paste.myst.rs/api-docs/index
+/// The relevent API documentation for this
+/// module is:
+/// https://paste.myst.rs/api-docs/paste
 #[allow(dead_code, unused_variables)]
 pub mod paste {
     use serde::Deserialize;
