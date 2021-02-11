@@ -44,7 +44,7 @@ pub mod user {
     /// Gets a user synchronously from [pastemyst](https://paste.myst.rs)
     /// This information is stored in the `UserObject` struct. If a user
     /// does not exist, it will return nothing and emit a console log
-    /// warning about the user not exist.
+    /// warning about the user not existing.
     ///
     /// As of now, there is no specific way to disable this warning
     /// unless you compile your own version. This might change in
@@ -91,7 +91,7 @@ pub mod user {
     /// Gets a user asynchronously from [pastemyst](https://paste.myst.rs)
     /// This information is stored in the `UserObject` struct. If a user
     /// does not exist, it will return nothing and emit a console log
-    /// warning about the user not exist.
+    /// warning about the user not existing.
     ///
     /// As of now, there is no specific way to disable this warning
     /// unless you compile your own version. This might change in
