@@ -37,16 +37,42 @@ macro_rules! str {
 /// https://paste.myst.rs/api-docs/time
 #[allow(dead_code, unused_variables)]
 pub mod time {
-
+    /// All the possible values of the
+    /// expiration of a paste provided
+    /// by PasteMyst's API v2.
     pub mod expires_in {
+        /// The paste will never expire.
+        /// Granted that this will only
+        /// not be deleted by the code
+        /// base, the data may get lost
+        /// from the physical drive
+        /// though chances are extremely
+        /// slim.
         const NEVER: &str = "never";
+        /// The paste will expire in
+        /// an hour.
         const ONE_HOUR: &str = "1h";
+        /// The paste will expire in
+        /// two hours.
         const TWO_HOURS: &str = "2h";
+        /// The paste will expire in
+        /// ten hours.
         const TEN_HOURS: &str = "10h";
+        /// The paste will expire in
+        /// one day (24 hours).
         const ONE_DAY: &str = "1d";
+        /// The paste will expire in
+        /// two days (48 hours).
         const TWO_DAYS: &str = "2d";
+        /// The paste will expire in
+        /// a week (168 hours).
         const ONE_WEEK: &str = "1w";
+        /// The paste will expire in
+        /// a month (~672 hours).
         const ONE_MONTH: &str = "1m";
+        /// The paste will expire in
+        /// a whole year (~8736 hours,
+        /// followed by solar calander).
         const ONE_YEAR: &str = "1y";
     }
 }
