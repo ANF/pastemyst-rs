@@ -86,6 +86,38 @@ pub mod time {
         /// followed by solar calander).
         pub const ONE_YEAR: &str = "1y";
     }
+
+    /// Synchronously sends a request to pastemyst's time
+    /// module to convert the `expires_in` field to a unix
+    /// timestamp. This method is really useful for time
+    /// related operations where this kind of data is cruicial
+    /// for certian functionality.
+    ///
+    /// If the `expires_in` field is not valid or recognized,
+    /// it does **NOT** send any web requests and emits a warning.
+    /// To prevent runtime exceptions, the return value, when unset
+    /// i.e, when web requests aren't send, sets the value of the
+    /// return integer to 0 regardless.
+    ///
+    /// The `created_at` value is an unsigned 64 bit integer meanwhile
+    /// `expires_at` is a string. It's recommended to use provided strings
+    /// by the library under `pastemyst::time::expires_in`.
+    ///
+    /// ### API Docs
+    /// The relevent API documentation for this method is:
+    /// https://paste.myst.rs/api-docs/time
+    ///
+    /// ## Examples
+    ///
+    /// ```rust
+    /// use pastemyst::time::*;
+    ///
+    /// fn main() -> TimeResult<()> {
+    ///     let unix_time: u64 = expires_into_unix(42, expires_in::ONE_DAY)?;
+    ///     println!("{}", unix_time.to_string());
+    ///     Ok(())
+    /// }
+    /// ```
     pub fn expires_into_unix(created_at: u64, expires_in: &str) -> TimeResult<u64> {
         let mut response: TimeObject = TimeObject { result: 0 };
         #[allow(unused_assignments)] let mut valid_time: bool = false;
