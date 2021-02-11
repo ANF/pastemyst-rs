@@ -58,7 +58,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 More from the [examples](./examples/) and [documentation](https://docs.rs/pastemyst-rs/*/).
 
 ### Feature support
-| Feature                             | Support   |  Async |
+| Feature                             | Support   | Async  |
 | :---------------------------------- | :-------: | -----: |
 | API v1                              | ✔         | ⛔    |
 | API v2                              | ✔         | ⛔    |
