@@ -43,6 +43,9 @@ pub mod time {
     /// the default value of `reqwest::Error`. Keep note
     /// that `E` can be overriden.
     pub type TimeResult<T, E = reqwest::Error> = Result<T, E>;
+    
+    const TIME_ENDPOINT: &str = "https://paste.myst.rs/api/v2/time/expiresInToUnixTime";
+
     /// All the possible values of the
     /// expiration of a paste provided
     /// by PasteMyst's API v2.
