@@ -1,3 +1,24 @@
+/// This macro can assist prevention of
+/// converting an str to a String and
+/// calling that method each time.
+///
+/// It can be used for other purposes
+/// if you wish to, but it's designed
+/// to work with any struct field that
+/// takes in a String type. Not necessarily
+/// recommened to be used however you can
+/// if you wish to but it's not compulsory.
+///
+/// You can also use other macros like
+/// methods like `String::from` or even
+/// `to_string()` if you wish to.
+///
+/// This method calls the `String::from` method.
+#[macro_export]
+macro_rules! str {
+    {$value:expr} => (String::from($value));
+}
+
 /// This is the user module which
 /// allows you to communicate with
 /// pastemyst's api to send `GET`
@@ -253,27 +274,6 @@ pub mod paste {
     /// }
     /// ```
     pub type PasteResult<T, E = Box<dyn std::error::Error>> = std::result::Result<T, E>;
-
-    /// This macro can assist prevention of
-    /// converting an str to a String and
-    /// calling that method each time.
-    ///
-    /// It can be used for other purposes
-    /// if you wish to, but it's designed
-    /// to work with any struct field that
-    /// takes in a String type. Not necessarily
-    /// recommened to be used however you can
-    /// if you wish to but it's not compulsory.
-    ///
-    /// You can also use other macros like
-    /// methods like `String::from` or even
-    /// `to_string()` if you wish to.
-    ///
-    /// This method calls the `String::from` method.
-    #[macro_export]
-    macro_rules! str {
-        {$value:expr} => (String::from($value));
-    }
 
     /// An enum of PasteMyt language constants.
     //#[allow(non_camel_case_types)]
