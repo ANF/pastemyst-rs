@@ -38,6 +38,17 @@ macro_rules! str {
 #[allow(dead_code, unused_variables)]
 pub mod time {
 
+    pub mod expires_in {
+        const NEVER: &str = "never";
+        const ONE_HOUR: &str = "1h";
+        const TWO_HOURS: &str = "2h";
+        const TEN_HOURS: &str = "10h";
+        const ONE_DAY: &str = "1d";
+        const TWO_DAYS: &str = "2d";
+        const ONE_WEEK: &str = "1w";
+        const ONE_MONTH: &str = "1m";
+        const ONE_YEAR: &str = "1y";
+    }
 }
 
 /// This is the user module which
