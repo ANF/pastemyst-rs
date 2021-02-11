@@ -254,12 +254,13 @@ pub mod user {
         /// If their profile is public
         /// or not.
         pub publicProfile: bool,
-        /* This part of the code is commented because
-           pastemyst does not return this value as stated
-           in the documentation right here:
         /// How long has the user
-        /// been a supporter for, 0 if not a supporter
-        pub supporterLength: u32*/
+        /// been a supporter for,
+        /// 0 if not a supporter
+        pub supporterLength: u32,
+        /// If the user has contributed
+        /// to pastemyst.
+        pub contributor: bool,
     }
 }
 
