@@ -51,6 +51,11 @@ pub mod user {
     /// the future, but for now, a warning will be emmited if
     /// it returns false.
     ///
+    /// It still returns the struct when a user is not found and emit
+    /// a warning as stated earlier except that this method will return
+    /// an empty struct i.e, all the strings will be set to `""`, all
+    /// the booleans set to false and all numerics set to 0.
+    ///
     /// ### API Docs
     /// The relevent API documentation for this method is:
     /// https://paste.myst.rs/api-docs/user
@@ -97,6 +102,11 @@ pub mod user {
     /// unless you compile your own version. This might change in
     /// the future, but for now, a warning will be emmited if
     /// it returns false.
+    ///
+    /// It still returns the struct when a user is not found and emit
+    /// a warning as stated earlier except that this method will return
+    /// an empty struct i.e, all the strings will be set to `""`, all
+    /// the booleans set to false and all numerics set to 0.
     ///
     /// ### API Docs
     /// The relevent API documentation for this method is:
