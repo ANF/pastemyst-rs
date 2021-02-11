@@ -49,7 +49,7 @@ pub mod user {
     /// As of now, there is no specific way to disable this warning
     /// unless you compile your own version. This might change in
     /// the future, but for now, a warning will be emmited if
-    /// it returns false
+    /// it returns false.
     ///
     /// ### API Docs
     /// The relevent API documentation for this method is:
@@ -96,7 +96,7 @@ pub mod user {
     /// As of now, there is no specific way to disable this warning
     /// unless you compile your own version. This might change in
     /// the future, but for now, a warning will be emmited if
-    /// it returns false
+    /// it returns false.
     ///
     /// ### API Docs
     /// The relevent API documentation for this method is:
