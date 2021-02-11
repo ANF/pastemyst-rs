@@ -19,6 +19,22 @@ macro_rules! str {
     {$value:expr} => (String::from($value));
 }
 
+/// This module is extremely useful
+/// for time-related operations.
+///
+/// So far, the only method that the
+/// API offers is to convert a date
+/// time that expires in pastemyst's
+/// time type to unix timestamp.
+///
+/// This mod also offers pastemyst's
+/// "time type" which was mentioned
+/// earlier above.
+///
+/// ### API Docs
+/// The relevent API documentation for this
+/// module is:
+/// https://paste.myst.rs/api-docs/time
 #[allow(dead_code, unused_variables)]
 pub mod time {
 
