@@ -30,14 +30,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let pasties: Vec<PastyObject> = vec![
         PastyObject {
             _id: str!(""),
-            language: str!(pastemyst::paste::language::RUST),
+            language: str!(pastemyst::data::language::RUST),
             title: "A pasty title".to_string(),
             code: String::from("fn main() { println!(\"Hello World!\"); }"),
         },
         PastyObject {
             _id: str!(""),
             title: "Another pasty title".to_string(),
-            language: str!(pastemyst::paste::language::CLANG),
+            language: str!(pastemyst::data::language::CLANG),
             code: String::from("#include \"stdio.h\"\n\nint main() {\n\tprintf(\"Hello World!\");\n}"),
         },
     ];

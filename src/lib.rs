@@ -1014,7 +1014,7 @@ pub mod paste {
     ///     let pasties = vec![pastemyst::paste::PastyObject {
     ///         _id: str!("PastyID"),
     ///         code: String::from("print('Hello World!')"),
-    ///         language: str!(pastemyst::paste::language::PYTHON),
+    ///         language: str!(pastemyst::data::language::PYTHON),
     ///         title: "Pasty Title".to_string(),
     ///     }];
     ///     let edit_object = pastemyst::paste::EditObject {
@@ -1068,7 +1068,7 @@ pub mod paste {
     ///     let pasties = vec![pastemyst::paste::PastyObject {
     ///         _id: str!("PastyID"),
     ///         code: String::from("print('Hello World!')"),
-    ///         language: str!(pastemyst::paste::language::PYTHON),
+    ///         language: str!(pastemyst::data::language::PYTHON),
     ///         title: "Pasty Title".to_string(),
     ///     }];
     ///     let edit_object = pastemyst::paste::EditObject {
@@ -1255,7 +1255,7 @@ pub mod paste {
     /// ```rust
     /// let pasty: PastyObject = PastyObject {
     ///     _id: None,
-    ///     language: pastemyst::paste::language::JSON,
+    ///     language: pastemyst::data::language::JSON,
     ///     title: Some(String::from("This is a pasty title")),
     ///     code: Some(String::from("{\"This_Is\": \"JSON_Code\"}")),
     /// };
