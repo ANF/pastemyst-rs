@@ -906,7 +906,7 @@ pub mod paste {
     ///
     /// #[tokio::main]
     /// async fn main() -> Result<()> {
-    ///     let contents = get_paste(hipfqanx);
+    ///     let contents = get_paste("hipfqanx");
     ///     let paste = create_private_paste(contents, "Your PasteMyst Token. Get it from: https://paste.myst.rs/user/settings").await?;
     ///     println!("{}", paste.isPrivate);
     ///     Ok(())
