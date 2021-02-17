@@ -260,14 +260,12 @@ pub mod data {
         /// standards.
         pub mimes: Vec<String>,
         /// The extension(s) of a language
-        #[serde(default)]
         pub ext: Option<Vec<String>>,
         /// The color of a language used
         /// to identify a language.
         ///
         /// This field may, or may not be
         /// provided by PasteMyst.
-        #[serde(default)]
         pub color: Option<String>
     }
 
