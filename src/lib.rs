@@ -234,6 +234,10 @@ pub mod data {
         Ok(reqwest::blocking::get(&parse_url(language_name, "name"))?.json()?)
     }
 
+    pub async fn get_language_by_name_async(language_name: &str) -> DataResult<DataObject, reqwest::Error> {
+        Ok(reqwest::get(&parse_url(language_name, "name")).await?.json().await?)
+    }
+
     #[derive(Deserialize, Debug)]
     pub struct DataObject {
         /// The name of the language.
