@@ -222,7 +222,63 @@ pub mod time {
 /// The relevent API documentation for
 /// this module is:
 /// https://paste.myst.rs/api-docs/data
+#[allow(dead_code, unused_variables)]
 pub mod data {
+    use serde::Deserialize;
+
+    pub type DataResult<T, E = reqwest::Error> = Result<T, E>;
+
+    const DATA_ENDPOINT: &str = "https://paste.myst.rs/data/";
+
+    pub fn get_language_by_name(language_name: &str) -> DataResult<DataObject, reqwest::Error> {
+        #[allow(unused_assignments)] let mut data: DataObject = DataObject {
+            name: str!(""),
+            mode: str!(""),
+            mimes: vec![],
+            ext: Some(vec![]),
+            color: Some(str!(""))
+        };
+        let result = reqwest::blocking::get(&parse_url(language_name, "name"))?
+            .json()?;
+        let _result = reqwest::blocking::get("https://paste.myst.rs/api/v2/data/language?name=Autodetect")?.text()?;
+        //let __result: DataObject = serde_json::from_str(&_result).unwrap();
+        data = serde_json::from_str(&_result).unwrap();
+        println!("{:?}", data.mimes[0]);
+        Ok(data)
+    }
+
+    #[derive(Deserialize, Debug)]
+    pub struct DataObject {
+        /// The name of the language.
+        pub name: String,
+        /// The mode of a language used
+        /// in a pasty editor.
+        pub mode: String,
+        /// A vector of the data types
+        /// of each language that is
+        /// meant to be used by official
+        /// standards.
+        pub mimes: Vec<String>,
+        /// The extension(s) of a language
+        #[serde(default)]
+        pub ext: Option<Vec<String>>,
+        /// The color of a language used
+        /// to identify a language.
+        ///
+        /// This field may, or may not be
+        /// provided by PasteMyst.
+        #[serde(default)]
+        pub color: Option<String>
+    }
+
+    fn parse_url(value: &str, req_type: &str) -> String {
+        let parsed_url: String;
+        if req_type == "name" { parsed_url = format!("{}language?name={}", DATA_ENDPOINT, &value); }
+        else if req_type == "ext" { parsed_url = format!("{}languageExt?extension={}", DATA_ENDPOINT, &value); }
+        else { panic!("[pastemyst] Invalid valid: `req_type` provided. Report the developer about this."); }
+        return parsed_url;
+    }
+
     /// An enum of PasteMyt language constants.
     //#[allow(non_camel_case_types)]
     pub mod language {
