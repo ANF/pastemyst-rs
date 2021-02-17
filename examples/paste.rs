@@ -130,7 +130,7 @@ async fn call_create_private_paste_async(auth_token: &str) -> PasteResult<()> {
         PastyObject {
             _id: str!(""),
             title: "Another pasty title".to_string(),
-            language: str!(pastemyst::paste::language::CLANG),
+            language: str!(pastemyst::data::language::CLANG),
             code: String::from("#include \"stdio.h\"\n\nint main() {\n\tprintf(\"Hello World!\");\n}"),
         },
     ];
