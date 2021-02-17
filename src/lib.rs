@@ -231,20 +231,7 @@ pub mod data {
     const DATA_ENDPOINT: &str = "https://paste.myst.rs/api/v2/data/";
 
     pub fn get_language_by_name(language_name: &str) -> DataResult<DataObject, reqwest::Error> {
-        #[allow(unused_assignments)] let mut data: DataObject = DataObject {
-            name: str!(""),
-            mode: str!(""),
-            mimes: vec![],
-            ext: Some(vec![]),
-            color: Some(str!(""))
-        };
-        let result = reqwest::blocking::get(&parse_url(language_name, "name"))?
-            .json()?;
-        let _result = reqwest::blocking::get("https://paste.myst.rs/api/v2/data/language?name=Autodetect")?.text()?;
-        //let __result: DataObject = serde_json::from_str(&_result).unwrap();
-        data = serde_json::from_str(&_result).unwrap();
-        println!("{:?}", data.mimes[0]);
-        Ok(data)
+        Ok(reqwest::blocking::get(&parse_url(language_name, "name"))?.json()?)
     }
 
     #[derive(Deserialize, Debug)]
