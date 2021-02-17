@@ -228,7 +228,7 @@ pub mod data {
 
     pub type DataResult<T, E = reqwest::Error> = Result<T, E>;
 
-    const DATA_ENDPOINT: &str = "https://paste.myst.rs/data/";
+    const DATA_ENDPOINT: &str = "https://paste.myst.rs/api/v2/data/";
 
     pub fn get_language_by_name(language_name: &str) -> DataResult<DataObject, reqwest::Error> {
         #[allow(unused_assignments)] let mut data: DataObject = DataObject {
