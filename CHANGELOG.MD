@@ -38,3 +38,4 @@
 * Added more fields in UserObject.
 * Fixed a bug where if a user does not exist, crate panics, now it returns an empty struct.
 * Added time module and time operations - completed fully.
+* Moved language module into data.
