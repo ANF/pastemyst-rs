@@ -215,6 +215,16 @@ pub mod time {
     }
 }
 
+/// This is the data module that can be
+/// used for general purposes
+///
+/// ### API Docs
+/// The relevent API documentation for
+/// this module is:
+/// https://paste.myst.rs/api-docs/data
+pub mod data {
+}
+
 /// This is the user module which
 /// allows you to communicate with
 /// pastemyst's api to send `GET`
