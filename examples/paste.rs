@@ -1,5 +1,5 @@
-use pastemyst::str;
 use pastemyst::paste::*;
+use pastemyst::str;
 
 type Error = Box<dyn std::error::Error>;
 type Result<T, E = Error> = std::result::Result<T, E>;
@@ -7,7 +7,7 @@ type Result<T, E = Error> = std::result::Result<T, E>;
 #[tokio::main]
 async fn main() -> Result<()> {
     // Create pastes
-    tokio::task::spawn_blocking(||call_create_paste().unwrap());
+    tokio::task::spawn_blocking(|| call_create_paste().unwrap());
     call_create_paste_async().await?;
     // tokio::task::spawn_blocking(
     //     ||call_create_private_paste(
@@ -16,7 +16,7 @@ async fn main() -> Result<()> {
     //     "Your PasteMyst Token. Get it from: https://paste.myst.rs/user/settings").await?;
 
     // Get pastes
-    tokio::task::spawn_blocking(||call_get_paste().unwrap());
+    tokio::task::spawn_blocking(|| call_get_paste().unwrap());
     call_get_paste_async().await?;
     // tokio::task::spawn_blocking(
     //     ||call_get_private_paste(
@@ -39,7 +39,9 @@ fn call_create_paste() -> Result<(), reqwest::Error> /*PasteResult<()>*/ {
             _id: str!(""),
             title: "Another pasty title".to_string(),
             language: str!(pastemyst::data::language::CLANG),
-            code: String::from("#include \"stdio.h\"\n\nint main() {\n\tprintf(\"Hello World!\");\n}"),
+            code: String::from(
+                "#include \"stdio.h\"\n\nint main() {\n\tprintf(\"Hello World!\");\n}",
+            ),
         },
     ];
     let data: CreateObject = CreateObject {
@@ -68,7 +70,9 @@ async fn call_create_paste_async() -> Result<()> {
             _id: str!(""),
             title: "Another pasty title".to_string(),
             language: str!(pastemyst::data::language::CLANG),
-            code: String::from("#include \"stdio.h\"\n\nint main() {\n\tprintf(\"Hello World!\");\n}"),
+            code: String::from(
+                "#include \"stdio.h\"\n\nint main() {\n\tprintf(\"Hello World!\");\n}",
+            ),
         },
     ];
     let data: CreateObject = CreateObject {
@@ -98,7 +102,9 @@ fn call_create_private_paste(auth_token: &str) -> PasteResult<()> {
             _id: str!(""),
             title: "Another pasty title".to_string(),
             language: str!(pastemyst::data::language::CLANG),
-            code: String::from("#include \"stdio.h\"\n\nint main() {\n\tprintf(\"Hello World!\");\n}"),
+            code: String::from(
+                "#include \"stdio.h\"\n\nint main() {\n\tprintf(\"Hello World!\");\n}",
+            ),
         },
     ];
     let data: CreateObject = CreateObject {
@@ -109,10 +115,7 @@ fn call_create_private_paste(auth_token: &str) -> PasteResult<()> {
         tags: String::from(""),
         pasties,
     };
-    let paste = create_private_paste(
-        data,
-        auth_token,
-    )?;
+    let paste = create_private_paste(data, auth_token)?;
     println!("https://paste.myst.rs/{}", paste._id);
     Ok(())
 }
@@ -131,7 +134,9 @@ async fn call_create_private_paste_async(auth_token: &str) -> PasteResult<()> {
             _id: str!(""),
             title: "Another pasty title".to_string(),
             language: str!(pastemyst::data::language::CLANG),
-            code: String::from("#include \"stdio.h\"\n\nint main() {\n\tprintf(\"Hello World!\");\n}"),
+            code: String::from(
+                "#include \"stdio.h\"\n\nint main() {\n\tprintf(\"Hello World!\");\n}",
+            ),
         },
     ];
     let data: CreateObject = CreateObject {
@@ -142,10 +147,7 @@ async fn call_create_private_paste_async(auth_token: &str) -> PasteResult<()> {
         tags: String::from(""),
         pasties,
     };
-    let paste = create_private_paste(
-        data,
-        auth_token,
-    )?;
+    let paste = create_private_paste(data, auth_token)?;
     println!("https://paste.myst.rs/{}", paste._id);
     Ok(())
 }
@@ -173,7 +175,8 @@ async fn call_get_paste_async() -> PasteResult<()> {
 fn call_get_private_paste() -> PasteResult<()> {
     let paste: PasteObject = get_private_paste(
         "pasteID",
-        "Your PasteMyst Token. Get it from: https://paste.myst.rs/user/settings")?;
+        "Your PasteMyst Token. Get it from: https://paste.myst.rs/user/settings",
+    )?;
     println!("{}", paste.ownerId);
     Ok(())
 }
@@ -181,11 +184,7 @@ fn call_get_private_paste() -> PasteResult<()> {
 /// Gets a private paste from pastemyst asynchronously.
 #[allow(dead_code)]
 async fn call_get_private_paste_async(auth_token: &str) -> PasteResult<()> {
-    let paste: PasteObject = get_private_paste_async(
-        "pasteID",
-        auth_token,
-    )
-    .await?;
+    let paste: PasteObject = get_private_paste_async("pasteID", auth_token).await?;
     println!("{}", paste.isPrivate);
     Ok(())
 }

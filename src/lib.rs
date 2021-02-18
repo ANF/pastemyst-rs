@@ -45,7 +45,7 @@ pub mod time {
     /// the default value of `reqwest::Error`. Keep note
     /// that `E` can be overriden.
     pub type TimeResult<T, E = reqwest::Error> = Result<T, E>;
-    
+
     const TIME_ENDPOINT: &str = "https://paste.myst.rs/api/v2/time/expiresInToUnixTime";
 
     /// All the possible values of the
@@ -120,7 +120,8 @@ pub mod time {
     /// ```
     pub fn expires_into_unix(created_at: u64, expires_in: &str) -> TimeResult<u64> {
         let mut response: TimeObject = TimeObject { result: 0 };
-        #[allow(unused_assignments)] let mut valid_time: bool = false;
+        #[allow(unused_assignments)]
+        let mut valid_time: bool = false;
         match expires_in {
             expires_in::NEVER => valid_time = true,
             expires_in::ONE_HOUR => valid_time = true,
@@ -130,12 +131,17 @@ pub mod time {
             expires_in::ONE_WEEK => valid_time = true,
             expires_in::ONE_MONTH => valid_time = true,
             expires_in::ONE_YEAR => valid_time = true,
-            _ => valid_time = false
+            _ => valid_time = false,
         }
         if valid_time {
             response = reqwest::blocking::get(&parse_time(created_at, expires_in))?
-                .json().unwrap();
-        } else { println!("[pastemyst] The given expires timestamp is not valid and 0 will be returned."); }
+                .json()
+                .unwrap();
+        } else {
+            println!(
+                "[pastemyst] The given expires timestamp is not valid and 0 will be returned."
+            );
+        }
         Ok(response.result)
     }
 
@@ -173,7 +179,8 @@ pub mod time {
     /// ```
     pub async fn expires_into_unix_async(created_at: u64, expires_in: &str) -> TimeResult<u64> {
         let mut response: TimeObject = TimeObject { result: 0 };
-        #[allow(unused_assignments)] let mut valid_time: bool = false;
+        #[allow(unused_assignments)]
+        let mut valid_time: bool = false;
         match expires_in {
             expires_in::NEVER => valid_time = true,
             expires_in::ONE_HOUR => valid_time = true,
@@ -183,15 +190,21 @@ pub mod time {
             expires_in::ONE_WEEK => valid_time = true,
             expires_in::ONE_MONTH => valid_time = true,
             expires_in::ONE_YEAR => valid_time = true,
-            _ => valid_time = false
+            _ => valid_time = false,
         }
         if valid_time {
             response = reqwest::Client::builder()
                 .build()?
                 .get(&parse_time(created_at, expires_in))
-                .send().await?
-                .json().await?;
-        } else { println!("[pastemyst] The given expires timestamp is not valid and 0 will be returned."); }
+                .send()
+                .await?
+                .json()
+                .await?;
+        } else {
+            println!(
+                "[pastemyst] The given expires timestamp is not valid and 0 will be returned."
+            );
+        }
         Ok(response.result)
     }
 
@@ -204,14 +217,16 @@ pub mod time {
     /// This is the main reason why this
     /// struct has been kept private.
     #[derive(Deserialize)]
-    struct TimeObject { result: u64 }
+    struct TimeObject {
+        result: u64,
+    }
 
     /// Parses the time module's API path
     fn parse_time(created_at: u64, expires_in: &str) -> String {
         return format!(
             "{}?createdAt={}&expiresIn={}",
             TIME_ENDPOINT, created_at, expires_in
-        )
+        );
     }
 }
 
@@ -254,7 +269,7 @@ pub mod data {
     /// }
     /// ```
     pub fn get_language_by_name(language_name: &str) -> DataResult<DataObject, reqwest::Error> {
-        Ok(reqwest::blocking::get(&parse_url(language_name, "name"))?.json()?)
+        reqwest::blocking::get(&parse_url(language_name, "name"))?.json()
     }
 
     /// Get information on a specific language *supported by PasteMyst*.
@@ -281,8 +296,13 @@ pub mod data {
     ///     Ok(())
     /// }
     /// ```
-    pub async fn get_language_by_name_async(language_name: &str) -> DataResult<DataObject, reqwest::Error> {
-        Ok(reqwest::get(&parse_url(language_name, "name")).await?.json().await?)
+    pub async fn get_language_by_name_async(
+        language_name: &str,
+    ) -> DataResult<DataObject, reqwest::Error> {
+        Ok(reqwest::get(&parse_url(language_name, "name"))
+            .await?
+            .json()
+            .await?)
     }
 
     /// The same thing as getting a language by a name, except that it is by
@@ -308,8 +328,10 @@ pub mod data {
     ///     Ok(())
     /// }
     /// ```
-    pub fn get_language_by_extension(lang_extension: &str) -> DataResult<DataObject, reqwest::Error> {
-        Ok(reqwest::blocking::get(&parse_url(lang_extension, "ext"))?.json()?)
+    pub fn get_language_by_extension(
+        lang_extension: &str,
+    ) -> DataResult<DataObject, reqwest::Error> {
+        reqwest::blocking::get(&parse_url(lang_extension, "ext"))?.json()
     }
 
     /// The same thing as getting a language by a name, except that it is by
@@ -336,8 +358,13 @@ pub mod data {
     ///     Ok(())
     /// }
     /// ```
-    pub async fn get_language_by_extension_async(lang_extension: &str) -> DataResult<DataObject, reqwest::Error> {
-        Ok(reqwest::get(&parse_url(lang_extension, "ext")).await?.json().await?)
+    pub async fn get_language_by_extension_async(
+        lang_extension: &str,
+    ) -> DataResult<DataObject, reqwest::Error> {
+        Ok(reqwest::get(&parse_url(lang_extension, "ext"))
+            .await?
+            .json()
+            .await?)
     }
 
     #[derive(Deserialize)]
@@ -372,10 +399,16 @@ pub mod data {
 
     fn parse_url(value: &str, req_type: &str) -> String {
         let parsed_url: String;
-        if req_type == "name" { parsed_url = format!("{}language?name={}", DATA_ENDPOINT, &value); }
-        else if req_type == "ext" { parsed_url = format!("{}languageExt?extension={}", DATA_ENDPOINT, &value); }
-        else { panic!("[pastemyst] Invalid valid: `req_type` provided. Report the developer about this."); }
-        return parsed_url;
+        if req_type == "name" {
+            parsed_url = format!("{}language?name={}", DATA_ENDPOINT, &value);
+        } else if req_type == "ext" {
+            parsed_url = format!("{}languageExt?extension={}", DATA_ENDPOINT, &value);
+        } else {
+            panic!(
+                "[pastemyst] Invalid valid: `req_type` provided. Report the developer about this."
+            );
+        }
+        parsed_url
     }
 
     /// An enum of PasteMyt language constants.
@@ -404,7 +437,7 @@ pub mod data {
         pub const CRYSTAL: &str = "Crystal";
         pub const CSS: &str = "CSS";
         pub const CQL: &str = "CQL";
-        pub const DLANG: &'static str = "D";
+        pub const DLANG: &str = "D";
         pub const D: &str = "D";
         pub const DART: &str = "Dart";
         pub const DIFF: &str = "diff";
@@ -555,7 +588,7 @@ pub mod data {
 #[allow(dead_code, unused_variables)]
 pub mod user {
     use serde::Deserialize;
-    
+
     /// The type provided by the pastemyst lib. It takes
     /// a type `T` and evalutates to that type and a
     /// `Result` like so: `Result<T, E>` where `E` has
@@ -603,10 +636,13 @@ pub mod user {
             defaultLang: str!(""),
             publicProfile: false,
             supporterLength: 0,
-            contributor: false
+            contributor: false,
         };
-        if user_exists(username)? == false {
-            print!("[pastemyst] The user '{}' does not exist and an empty object is returned.\n", username);            
+        if !(user_exists(username)?) {
+            println!(
+                "[pastemyst] The user '{}' does not exist and an empty object is returned.",
+                username
+            );
         } else {
             result = reqwest::blocking::Client::builder()
                 .build()?
@@ -656,16 +692,21 @@ pub mod user {
             defaultLang: str!(""),
             publicProfile: false,
             supporterLength: 0,
-            contributor: false
+            contributor: false,
         };
-        if user_exists_async(username).await? == false {
-            print!("[pastemyst] The user '{}' does not exist and an empty object is returned.\n", username);            
+        if !(user_exists_async(username).await?) {
+            println!(
+                "[pastemyst] The user '{}' does not exist and an empty object is returned.",
+                username
+            );
         } else {
             result = reqwest::Client::builder()
                 .build()?
                 .get(&parse_user(username))
-                .send().await?
-                .json().await?;
+                .send()
+                .await?
+                .json()
+                .await?;
         }
         Ok(result)
     }
@@ -712,8 +753,11 @@ pub mod user {
             .get(&parse_user_get(username))
             .send()?;
         let mut user_exists: bool = false;
-        if result.status().as_u16() == 200 { user_exists = true; }
-        else if result.status().as_u16() == 404 { user_exists = false; }
+        if result.status().as_u16() == 200 {
+            user_exists = true;
+        } else if result.status().as_u16() == 404 {
+            user_exists = false;
+        }
         Ok(user_exists)
     }
 
@@ -759,17 +803,25 @@ pub mod user {
         let result = reqwest::Client::builder()
             .build()?
             .get(&parse_user_get(username))
-            .send().await?;
+            .send()
+            .await?;
         let mut user_exists: bool = false;
-        if result.status().as_u16() == 200 { user_exists = true; }
-        else if result.status().as_u16() == 404 { user_exists = false; }
+        if result.status().as_u16() == 200 {
+            user_exists = true;
+        } else if result.status().as_u16() == 404 {
+            user_exists = false;
+        }
         Ok(user_exists)
     }
 
     /// Parses a user `GET` url endpoint.
-    fn parse_user(username: &str) -> String { return format!("{}{}", USER_ENDPOINT, username) }
+    fn parse_user(username: &str) -> String {
+        return format!("{}{}", USER_ENDPOINT, username);
+    }
     /// Parses a user exists url endpoint.
-    fn parse_user_get(username: &str) -> String { return format!("{}{}/exists", USER_ENDPOINT, username) }
+    fn parse_user_get(username: &str) -> String {
+        return format!("{}{}/exists", USER_ENDPOINT, username);
+    }
 
     /// The user object that pastemyst provides.
     /// It has all the public details of a user.
@@ -991,7 +1043,7 @@ pub mod paste {
             .body(serde_json::to_string(&contents).unwrap())
             .send()
             .unwrap();
-        Ok(result.json()?)
+        result.json()
     }
 
     /// Uses the `CreateObject` struct as a parameter for paste
@@ -1049,7 +1101,7 @@ pub mod paste {
     /// send a paste to [pastemyst](https://paste.myst.rs)
     /// held under your account which you can configure
     /// to be private/public or not. You also get the
-    /// authority to delete that paste. This is a 
+    /// authority to delete that paste. This is a
     /// synchronous method.
     ///
     /// ## Examples
@@ -1079,7 +1131,7 @@ pub mod paste {
             .header(reqwest::header::CONTENT_TYPE, content_type)
             .body(serde_json::to_string(&contents).unwrap())
             .send()?;
-        Ok(result.json()?)
+        result.json()
     }
 
     /// Uses the `CreateObject` struct and a `&str` authorization
@@ -1094,7 +1146,7 @@ pub mod paste {
     ///
     /// ```rust
     /// use pastemyst::paste::*;
-    /// 
+    ///
     /// fn main() -> Result<(), reqwest::Error> /*PasteResult<()>*/ {
     ///     let pasties: Vec<PastyObject> = vec![
     ///         PastyObject {
@@ -1158,34 +1210,34 @@ pub mod paste {
     /// pastes as of this version writing this,
     /// you can only append pastes when editing
     /// within the site itself as the user.
-    /// 
+    ///
     /// ## Examples
     ///
     /// ```rust
-    /// use pastemyst::str;
-    /// use pastemyst::paste;
+    /// let pasties = vec![pastemyst::paste::PastyObject {
+    ///     _id: str!("PastyID"),
+    ///     code: String::from("print('Hello World!')"),
+    ///     language: str!(pastemyst::data::language::PYTHON),
+    ///     title: "Pasty Title".to_string(),
+    /// }];
+    /// let edit_object = pastemyst::paste::EditObject {
+    ///     isPrivate: false,
+    ///     isPublic: false,
+    ///     pasties: pasties,
+    ///     tags: str!("Hello, World"),
+    ///     title: str!("My title")
+    /// };
+    /// let paste_result: PasteObject = paste::edit_paste(edit_object,
+    ///     "PasteID",
+    ///     "Your PasteMyst Token. Get it from: https://paste.myst.rs/user/settings",
+    /// )?;
     ///
-    /// fn main() {
-    ///     let pasties = vec![pastemyst::paste::PastyObject {
-    ///         _id: str!("PastyID"),
-    ///         code: String::from("print('Hello World!')"),
-    ///         language: str!(pastemyst::data::language::PYTHON),
-    ///         title: "Pasty Title".to_string(),
-    ///     }];
-    ///     let edit_object = pastemyst::paste::EditObject {
-    ///         isPrivate: false,
-    ///         isPublic: false,
-    ///         pasties: pasties,
-    ///         tags: str!("Hello, World"),
-    ///         title: str!("My title")
-    ///     };
-    ///     let paste_result: PasteObject = paste::edit_paste(edit_object,
-    ///         "PasteID",
-    ///         "Your PasteMyst Token. Get it from: https://paste.myst.rs/user/settings",
-    ///     )?;
-    /// }
     /// ```
-    pub fn edit_paste(edit_info: EditObject, id: &str, auth_token: &str) -> Result<PasteObject, reqwest::Error> {
+    pub fn edit_paste(
+        edit_info: EditObject,
+        id: &str,
+        auth_token: &str,
+    ) -> Result<PasteObject, reqwest::Error> {
         let content_type = reqwest::header::HeaderValue::from_static("application/json");
         let result = reqwest::blocking::Client::builder()
             .build()?
@@ -1194,7 +1246,7 @@ pub mod paste {
             .header(reqwest::header::CONTENT_TYPE, content_type)
             .body(serde_json::to_string(&edit_info).unwrap())
             .send()?;
-        Ok(result.json()?)
+        result.json()
     }
 
     /// Sends a request to pastemyst to edit a
@@ -1211,7 +1263,7 @@ pub mod paste {
     /// pastes as of this version writing this,
     /// you can only append pastes when editing
     /// within the site itself as the user.
-    /// 
+    ///
     /// ## Examples
     ///
     /// ```rust
@@ -1239,7 +1291,11 @@ pub mod paste {
     ///     ).await?;
     /// }
     /// ```
-    pub async fn edit_paste_async(edit_info: EditObject, id: &str, auth_token: &str) -> Result<PasteObject, reqwest::Error> {
+    pub async fn edit_paste_async(
+        edit_info: EditObject,
+        id: &str,
+        auth_token: &str,
+    ) -> Result<PasteObject, reqwest::Error> {
         let content_type = reqwest::header::HeaderValue::from_static("application/json");
         let result = reqwest::Client::builder()
             .build()?
@@ -1247,7 +1303,8 @@ pub mod paste {
             .header("Authorization", auth_token)
             .header(reqwest::header::CONTENT_TYPE, content_type)
             .body(serde_json::to_string(&edit_info).unwrap())
-            .send().await?;
+            .send()
+            .await?;
         Ok(result.json().await?)
     }
 
@@ -1326,14 +1383,17 @@ pub mod paste {
             .build()?
             .delete(&parse_url(&id))
             .header("Authorization", auth_token)
-            .send().await?;
+            .send()
+            .await?;
         Ok(result.status().as_u16())
     }
 
     /// Parses the url by combining
     /// the `PASTE_ENDPOINT` with a
     /// provided id.
-    fn parse_url(id: &str) -> String { return PASTE_ENDPOINT.to_owned() + &id }
+    fn parse_url(id: &str) -> String {
+        PASTE_ENDPOINT.to_owned() + id
+    }
 
     /// The paste object recieved when
     /// getting a paste. It contains
@@ -1393,7 +1453,7 @@ pub mod paste {
     /// to Rust's nature, so you must provide them. The
     /// _id field should always be set to `None` though
     /// if it's not, it is ignored by PasteMyst's API.
-    /// 
+    ///
     /// The design choice of the language field not being
     /// optional was because auto detect isn't perfect
     /// and you generally should not rely on it especially
