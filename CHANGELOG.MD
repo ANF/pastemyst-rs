@@ -32,7 +32,7 @@
 * Added macro.
 * PastyObject no longer has the optional fields
 
-### Coming up
+### [1.0.0](https://github.com/ANF/pastemyst-rs/releases/tag/1.0.0)
 * Minor bug fixes.
 * Documentation improvements.
 * Added more fields in UserObject.
