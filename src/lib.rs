@@ -238,7 +238,8 @@ pub mod data {
         Ok(reqwest::get(&parse_url(language_name, "name")).await?.json().await?)
     }
 
-    #[derive(Deserialize, Debug)]
+    #[derive(Deserialize)]
+    #[allow(non_snake_case)]
     pub struct DataObject {
         /// The name of the language.
         pub name: String,
