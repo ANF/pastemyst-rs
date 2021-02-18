@@ -230,10 +230,57 @@ pub mod data {
 
     const DATA_ENDPOINT: &str = "https://paste.myst.rs/api/v2/data/";
 
+    /// Get information on a specific language *supported by PasteMyst*.
+    /// You are recommened to only use the language names provided within
+    /// `pastemyst::data::language` to prevent panicking. This method is
+    /// synchronous.
+    ///
+    /// This method does and will panic if a language is not found. The
+    /// simplest solution to this is to use the language name you know - as
+    /// mentioned earlier, it is recommended to use that specific module.
+    ///
+    /// Some fields, namely `color and `ext` may not be provided and will
+    /// have the value of `None`. This is because they are not provided
+    /// by PasteMyst which means that they do not exist or specified anywhere.
+    ///
+    /// ## Examples
+    /// ```rust
+    /// use pastemyst::data::*;
+    ///
+    /// fn main() -> DataResult<()> {
+    ///     let language: DataObject = get_language_by_name(language::DLANG)?;
+    ///     println!("{:?}", language.color);
+    ///     Ok(())
+    /// }
+    /// ```
     pub fn get_language_by_name(language_name: &str) -> DataResult<DataObject, reqwest::Error> {
         Ok(reqwest::blocking::get(&parse_url(language_name, "name"))?.json()?)
     }
 
+    /// Get information on a specific language *supported by PasteMyst*.
+    /// You are recommened to only use the language names provided within
+    /// `pastemyst::data::language` to prevent panicking. This method is
+    /// asynchronous.
+    ///
+    /// This method does and will panic if a language is not found. The
+    /// simplest solution to this is to use the language name you know - as
+    /// mentioned earlier, it is recommended to use that specific module.
+    ///
+    /// Some fields, namely `color and `ext` may not be provided and will
+    /// have the value of `None`. This is because they are not provided
+    /// by PasteMyst which means that they do not exist or specified anywhere.
+    ///
+    /// ## Examples
+    /// ```rust
+    /// use pastemyst::data::*;
+    ///
+    /// [tokio::main]
+    /// async fn main() -> DataResult<()> {
+    ///     let language: DataObject = get_language_by_name(language::CLANG).await?;
+    ///     println!("{:?}", language.name);
+    ///     Ok(())
+    /// }
+    /// ```
     pub async fn get_language_by_name_async(language_name: &str) -> DataResult<DataObject, reqwest::Error> {
         Ok(reqwest::get(&parse_url(language_name, "name")).await?.json().await?)
     }
