@@ -39,3 +39,7 @@
 * Fixed a bug where if a user does not exist, crate panics, now it returns an empty struct.
 * Added time module and time operations - completed fully.
 * Moved language module into data.
+* Added option to get a language by name.
+* Added option to get a language by extension.
+* Completed data module.
+* Bumped library to version 1.
