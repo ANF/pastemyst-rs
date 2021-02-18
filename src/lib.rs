@@ -285,6 +285,14 @@ pub mod data {
         Ok(reqwest::get(&parse_url(language_name, "name")).await?.json().await?)
     }
 
+    pub fn get_language_by_extension(lang_extension: &str) -> DataResult<DataObject, reqwest::Error> {
+        Ok(reqwest::blocking::get(&parse_url(lang_extension, "ext"))?.json()?)
+    }
+
+    pub async fn get_language_by_extension_async(lang_extension: &str) -> DataResult<DataObject, reqwest::Error> {
+        Ok(reqwest::get(&parse_url(lang_extension, "ext")).await?.json().await?)
+    }
+
     #[derive(Deserialize)]
     #[allow(non_snake_case)]
     pub struct DataObject {
