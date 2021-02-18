@@ -257,7 +257,14 @@ pub mod data {
         ///
         /// This field may, or may not be
         /// provided by PasteMyst.
-        pub color: Option<String>
+        pub color: Option<String>,
+        // /// An optional message provided
+        // /// by PasteMyst if the language
+        // /// has been found.
+        // statusMessage: Option<String>
+        // if result.statusMessage == None { println!("[pastemyst] The provided language does not exist!"); }
+        // Note:
+        // Might be implemented, might not. I'll let it stay here like so for now.
     }
 
     fn parse_url(value: &str, req_type: &str) -> String {
