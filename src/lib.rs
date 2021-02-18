@@ -266,7 +266,7 @@ pub mod data {
     /// simplest solution to this is to use the language name you know - as
     /// mentioned earlier, it is recommended to use that specific module.
     ///
-    /// Some fields, namely `color and `ext` may not be provided and will
+    /// Some fields, namely `color` and `ext` may not be provided and will
     /// have the value of `None`. This is because they are not provided
     /// by PasteMyst which means that they do not exist or specified anywhere.
     ///
