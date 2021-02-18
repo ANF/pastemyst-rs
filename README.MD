@@ -97,6 +97,8 @@ This is the current structure of the code:
 │       └─ question.md
 ├───examples/
 │   ├─ paste.rs
+│   ├─ time.rs
+│   ├─ data.rs
 │   └─ user.rs
 ├───src/
 │   └─ lib.rs
