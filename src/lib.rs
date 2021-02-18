@@ -274,7 +274,7 @@ pub mod data {
     /// ```rust
     /// use pastemyst::data::*;
     ///
-    /// [tokio::main]
+    /// #[tokio::main]
     /// async fn main() -> DataResult<()> {
     ///     let language: DataObject = get_language_by_name(language::CLANG).await?;
     ///     println!("{:?}", language.name);
