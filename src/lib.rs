@@ -276,7 +276,7 @@ pub mod data {
     ///
     /// #[tokio::main]
     /// async fn main() -> DataResult<()> {
-    ///     let language: DataObject = get_language_by_name(language::CLANG).await?;
+    ///     let language: DataObject = get_language_by_name_async(language::CLANG).await?;
     ///     println!("{:?}", language.name);
     ///     Ok(())
     /// }
