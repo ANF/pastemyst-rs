@@ -285,10 +285,57 @@ pub mod data {
         Ok(reqwest::get(&parse_url(language_name, "name")).await?.json().await?)
     }
 
+    /// The same thing as getting a language by a name, except that it is by
+    /// extension, of a given language. This is a synchronous method.
+    ///
+    /// This method will also panic if a language extension is not found. The
+    /// simplest solution to this is to use the language extension that PasteMyst
+    /// has. The easiest way to confirm so is to check if your desired language
+    /// exists in `pastemyst::data::langauge`.
+    ///
+    /// This will return a `DataObject`. Some fields, namely `color` and `ext` may
+    /// not be provided and will have the value of `None`. This is because they are
+    /// not provided by PasteMyst which means that they do not exist or specified
+    /// anywhere.
+    ///
+    /// ## Examples
+    /// ```rust
+    /// use pastemyst::data::*;
+    ///
+    /// fn main() -> DataResult<()> {
+    ///     let language: DataObject = get_language_by_extension("cs")?;
+    ///     println!("{}", language.name);
+    ///     Ok(())
+    /// }
+    /// ```
     pub fn get_language_by_extension(lang_extension: &str) -> DataResult<DataObject, reqwest::Error> {
         Ok(reqwest::blocking::get(&parse_url(lang_extension, "ext"))?.json()?)
     }
 
+    /// The same thing as getting a language by a name, except that it is by
+    /// extension, of a given language. This is an asynchronous method.
+    ///
+    /// This method will also panic if a language extension is not found. The
+    /// simplest solution to this is to use the language extension that PasteMyst
+    /// has. The easiest way to confirm so is to check if your desired language
+    /// exists in `pastemyst::data::langauge`.
+    ///
+    /// This will return a `DataObject`. Some fields, namely `color` and `ext` may
+    /// not be provided and will have the value of `None`. This is because they are
+    /// not provided by PasteMyst which means that they do not exist or specified
+    /// anywhere.
+    ///
+    /// ## Examples
+    /// ```rust
+    /// use pastemyst::data::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() -> DataResult<()> {
+    ///     let language: DataObject = get_language_by_extension_async("c").await?;
+    ///     println!("{:?}", language.color);
+    ///     Ok(())
+    /// }
+    /// ```
     pub async fn get_language_by_extension_async(lang_extension: &str) -> DataResult<DataObject, reqwest::Error> {
         Ok(reqwest::get(&parse_url(lang_extension, "ext")).await?.json().await?)
     }
