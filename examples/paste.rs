@@ -40,7 +40,7 @@ fn call_create_paste() -> Result<(), reqwest::Error> /*PasteResult<()>*/ {
             title: "Another pasty title".to_string(),
             language: str!(pastemyst::data::language::CLANG),
             code: String::from(
-                "#include \"stdio.h\"\n\nint main() {\n\tprintf(\"Hello World!\");\n}",
+                "#include <stdio.h>\n\nint main() {\n\tprintf(\"Hello World!\");\n}",
             ),
         },
     ];
@@ -71,7 +71,7 @@ async fn call_create_paste_async() -> Result<()> {
             title: "Another pasty title".to_string(),
             language: str!(pastemyst::data::language::CLANG),
             code: String::from(
-                "#include \"stdio.h\"\n\nint main() {\n\tprintf(\"Hello World!\");\n}",
+                "#include <stdio.h>\n\nint main() {\n\tprintf(\"Hello World!\");\n}",
             ),
         },
     ];
