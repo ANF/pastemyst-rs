@@ -3,11 +3,11 @@ use pastemyst::user::*;
 #[tokio::main]
 async fn main() -> UserResult<()> {
     // Get a user.
-    tokio::task::spawn_blocking(||call_get_user().unwrap());
+    tokio::task::spawn_blocking(|| call_get_user().unwrap());
     call_get_user_async().await?;
 
     // Check if a user exists.
-    tokio::task::spawn_blocking(||call_user_exists().unwrap());
+    tokio::task::spawn_blocking(|| call_user_exists().unwrap());
     call_user_exists_async().await?;
     Ok(())
 }

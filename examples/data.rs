@@ -3,11 +3,11 @@ use pastemyst::data::*;
 #[tokio::main]
 async fn main() -> DataResult<()> {
     // Get language by name.
-    tokio::task::spawn_blocking(||call_get_language_by_name().unwrap());
+    tokio::task::spawn_blocking(|| call_get_language_by_name().unwrap());
     call_get_language_by_name_async().await?;
 
     // Get language by extension.
-    tokio::task::spawn_blocking(||call_get_language_by_extension().unwrap());
+    tokio::task::spawn_blocking(|| call_get_language_by_extension().unwrap());
     call_get_language_by_extension_async().await?;
     Ok(())
 }

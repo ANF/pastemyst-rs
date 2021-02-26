@@ -2,7 +2,7 @@ use pastemyst::time::*;
 
 #[tokio::main]
 async fn main() -> TimeResult<()> {
-    tokio::task::spawn_blocking(||call_expires_into_unix().unwrap());
+    tokio::task::spawn_blocking(|| call_expires_into_unix().unwrap());
     call_expires_into_unix_async().await?;
     Ok(())
 }
