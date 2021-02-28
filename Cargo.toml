@@ -1,7 +1,7 @@
 [package]
 name = "pastemyst"
 version = "1.0.0"
-authors = ["ANF-Studios <anforg@outlook.com>"]
+authors = ["ANF-Studios <anforg@outlook.com>", "Lucasstarsz/Andrew Dey <andrewrcdey@gmail.com>"]
 edition = "2018"
 license = "MIT"
 keywords = ["pastemyst", "pastemyst-rs", "pastemystrs", "api-wrapper"]
@@ -22,4 +22,8 @@ serde = { version = "1.0.118", features = ["derive"] }
 serde_json = { version = "1.0.61" }
 
 [features]
+paste = []
+user = []
+data = []
+time = []
 default = ["paste", "user", "data", "time"]
