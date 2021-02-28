@@ -1,5 +1,3 @@
-#[allow(dead_code)]
-
 use serde::Deserialize;
 use serde::Serialize;
 
@@ -17,7 +15,10 @@ use serde::Serialize;
 /// ```
 pub type PasteResult<T, E = Box<dyn std::error::Error>> = std::result::Result<T, E>;
 
+#[allow(dead_code)]
 const ENDPOINT: &str = "https://paste.myst.rs/";
+#[allow(dead_code)]
+
 const BASE_ENDPOINT: &str = "https://paste.myst.rs/api/v2/";
 /// This endpoint is temporarily here due to a bug in pastemyst
 /// which does not allow the paste to be end when the last
