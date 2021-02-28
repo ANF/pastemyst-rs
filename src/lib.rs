@@ -19,11 +19,17 @@ macro_rules! str {
     {$value:expr} => (String::from($value));
 }
 
+#[cfg(feature = "time")]
 pub mod time;
 
+#[cfg(feature = "data")]
 pub mod data;
 
+#[cfg(feature = "user")]
 pub mod user;
 
+#[cfg(feature = "paste")]
 pub mod paste;
+
+#[cfg(feature = "discord")]
 pub mod discord;

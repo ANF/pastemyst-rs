@@ -20,3 +20,6 @@ reqwest = { version = "0.11.0", features = [ "blocking", "json" ] }
 tokio = { version = "1.0.1", features = ["macros"] }
 serde = { version = "1.0.118", features = ["derive"] }
 serde_json = { version = "1.0.61" }
+
+[features]
+default = ["paste", "user", "data", "time"]
