@@ -100,11 +100,19 @@ This is the current structure of the code:
 │   ├─ time.rs
 │   ├─ data.rs
 │   └─ user.rs
+├───images/
+│   └─ RustMyst.png
 ├───src/
-│   └─ lib.rs
+│   ├─ data.rs
+│   ├─ discord.rs
+│   ├─ lib.rs
+│   ├─ paste.rs
+│   ├─ time.rs
+│   └─ user.rs
 ├─── .gitattributes 
 ├─── .gitignore
 ├─── Cargo.toml
+├─── CHANGELOG.MD
 ├─── LICENSE
 └─── README.MD
 ```

@@ -22,4 +22,7 @@ serde = { version = "1.0.118", features = ["derive"] }
 serde_json = { version = "1.0.61" }
 
 [features]
-default = ["paste", "user", "data", "time"]
+discord = [] # You can add the dependency
+             # name inside the curly-brackets
+             # and mark it as optional
+#default = ["paste", "user", "data", "time"]
