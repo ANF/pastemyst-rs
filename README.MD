@@ -49,7 +49,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         tags: String::from(""),
         pasties: pasties,
     };
-    let paste: /*reqwest::Response*/ = paste::create_paste(data).unwrap(); // You don't need to add the commented part, that's jut for your information.
+    let paste /*: reqwest::Response*/ = paste::create_paste(data).unwrap(); // You don't need to add the commented part, that's jut for your information.
     println!("{}", paste._id);
     Ok(())
 }
